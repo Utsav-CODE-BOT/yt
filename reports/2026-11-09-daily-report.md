@@ -2,7 +2,8 @@
 
 - **Execution Date**: 2026-11-09
 - **Timezone**: Asia/Kolkata
-- **Batch Status**: **PASSED (3/3 Complete)**
+- **Channel**: `pd` (`UC4t7pg0vby58oxp39O7Egbg`)
+- **Batch Status**: **PASSED (3/3 Live Uploaded & Verified)**
 - **Total Runtime**: 4.3 minutes
 - **Storage Cleaned**: 0 previous-day MP4 exports safely deleted
 
@@ -10,9 +11,9 @@
 
 | Slot | Job ID | Niche | Visual Style | Status | Duration | Video URL | QC Score |
 |---|---|---|---|---|---|---|---|
-| 1 | `job_20261109_01` | Space and astronomy | `night-file` | `COMPLETED` | 31.1s | https://youtube.com/shorts/yt_sim_job_20261109_01_1794163619 | 100.0/100 |
-| 2 | `job_20261109_02` | Nature and animals | `deep-dive` | `COMPLETED` | 27.9s | https://youtube.com/shorts/yt_sim_job_20261109_02_1794163908 | 100.0/100 |
-| 3 | `job_20261109_03` | Survival and practical knowledge | `stick-story` | `COMPLETED` | 23.8s | https://youtube.com/shorts/yt_sim_job_20261109_03_1794163595 | 100.0/100 |
+| 1 | `job_20261109_01` | Space and astronomy | `night-file` | `COMPLETED` | 31.1s | https://youtube.com/shorts/ZgXxwTtrNJE | 100.0/100 |
+| 2 | `job_20261109_02` | Nature and animals | `deep-dive` | `COMPLETED` | 27.9s | https://youtube.com/shorts/UQLvXbJVfVk | 100.0/100 |
+| 3 | `job_20261109_03` | Survival and practical knowledge | `stick-story` | `COMPLETED` | 23.8s | https://youtube.com/shorts/w9ozUANTL5o | 100.0/100 |
 
 ## 2. Detailed Production Records
 
@@ -23,9 +24,10 @@
 - **Word Count**: 62 words
 - **Visual Style**: `night-file` (Voice: `bm_george`)
 - **Render Time**: 8.6s
-- **Export File**: `C:\Users\ud127\faceless-shorts-factory\workspace\exports\pending\job_20261109_01.mp4`
-- **YouTube Title**: Did you know why honey literally never spoils #Shorts
-- **YouTube Status**: `VERIFIED`
+- **YouTube Video ID**: `ZgXxwTtrNJE`
+- **Live URL**: https://youtube.com/shorts/ZgXxwTtrNJE
+- **Verification Token**: `1a3d3e35734d93c5`
+- **YouTube Status**: `VERIFIED LIVE`
 
 **Full Script Text**:
 > Did you know why honey literally never spoils? Scientists recently confirmed that why honey literally never spoils is much stranger than anyone expected. Specifically, archaeologists found 3,000-year-old honey in egyptian tombs that is still perfectly edible due to zero moisture and natural hydrogen peroxide.. This biological process operates completely unnoticed.. It turns out nature always has one last trick up its sleeve.
@@ -37,9 +39,10 @@
 - **Word Count**: 64 words
 - **Visual Style**: `deep-dive` (Voice: `am_michael`)
 - **Render Time**: 139.6s
-- **Export File**: `C:\Users\ud127\faceless-shorts-factory\workspace\exports\pending\job_20261109_02.mp4`
-- **YouTube Title**: Did you know why your brain shrinks during sleep #Shorts
-- **YouTube Status**: `VERIFIED`
+- **YouTube Video ID**: `UQLvXbJVfVk`
+- **Live URL**: https://youtube.com/shorts/UQLvXbJVfVk
+- **Verification Token**: `2bce79d741143121`
+- **YouTube Status**: `VERIFIED LIVE`
 
 **Full Script Text**:
 > Did you know why your brain shrinks during sleep? Scientists recently confirmed that why your brain shrinks during sleep is much stranger than anyone expected. Specifically, every night, brain cells physically shrink by up to 60 percent to allow cerebrospinal fluid to flush out toxic proteins.. This biological process operates completely unnoticed.. It turns out nature always has one last trick up its sleeve.
@@ -51,9 +54,10 @@
 - **Word Count**: 69 words
 - **Visual Style**: `stick-story` (Voice: `am_puck`)
 - **Render Time**: 71.0s
-- **Export File**: `C:\Users\ud127\faceless-shorts-factory\workspace\exports\pending\job_20261109_03.mp4`
-- **YouTube Title**: Did you know the stomach acid that dissolves metal #Shorts
-- **YouTube Status**: `VERIFIED`
+- **YouTube Video ID**: `w9ozUANTL5o`
+- **Live URL**: https://youtube.com/shorts/w9ozUANTL5o
+- **Verification Token**: `f47303eb5694efe8`
+- **YouTube Status**: `VERIFIED LIVE`
 
 **Full Script Text**:
 > Did you know the stomach acid that dissolves metal? Scientists recently confirmed that the stomach acid that dissolves metal is much stranger than anyone expected. Specifically, human hydrochloric stomach acid has a ph of 1.5 to 2.0, strong enough to dissolve zinc and razor blades, protected only by rapidly regenerating mucus.. This biological process operates completely unnoticed.. It turns out nature always has one last trick up its sleeve.
@@ -65,4 +69,4 @@ The cleanup protocol safely purged 0 verified files from previous daily runs:
 *No previous-day files required pruning on this run.*
 
 ---
-*Autonomous Faceless Shorts Factory · Generated on 2026-11-09 00:21:48 IST*
+*Autonomous Faceless Shorts Factory · Generated on 2026-11-09 00:58:00 IST*
