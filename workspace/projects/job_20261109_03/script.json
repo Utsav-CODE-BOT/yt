@@ -1,0 +1,69 @@
+{
+  "title": "The Stomach Acid That Dissolves Metal",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "lead": 0.4,
+  "outro": 0.9,
+  "gap": 0.28,
+  "lines": [
+    {
+      "text": "Did you know the stomach acid that dissolves metal?",
+      "caps": "STOMACH DISSOLVES"
+    },
+    {
+      "text": "Scientists recently confirmed that the",
+      "caps": "SCIENTISTS RECENTLY",
+      "gap": 0.18
+    },
+    {
+      "text": "stomach acid that dissolves metal",
+      "caps": "STOMACH DISSOLVES",
+      "gap": 0.18
+    },
+    {
+      "text": "is much stranger than anyone",
+      "caps": "STRANGER ANYONE",
+      "gap": 0.18
+    },
+    {
+      "text": "expected. Specifically, human hydrochloric stomach",
+      "caps": "EXPECTED. SPECIFICALLY,",
+      "gap": 0.18
+    },
+    {
+      "text": "acid has a ph of",
+      "caps": "ACID",
+      "gap": 0.18
+    },
+    {
+      "text": "1.5 to 2.0, strong enough",
+      "caps": "STRONG ENOUGH",
+      "gap": 0.18
+    },
+    {
+      "text": "to dissolve zinc and razor",
+      "caps": "DISSOLVE RAZOR",
+      "gap": 0.18
+    },
+    {
+      "text": "blades, protected only by rapidly",
+      "caps": "BLADES, PROTECTED",
+      "gap": 0.18
+    },
+    {
+      "text": "regenerating mucus.. This biological process",
+      "caps": "REGENERATING MUCUS..",
+      "gap": 0.18
+    },
+    {
+      "text": "operates completely unnoticed.. It turns",
+      "caps": "OPERATES COMPLETELY",
+      "gap": 0.18
+    },
+    {
+      "text": "out nature always has one last trick up its sleeve.",
+      "caps": "NATURE ALWAYS",
+      "gap": 0.3
+    }
+  ]
+}

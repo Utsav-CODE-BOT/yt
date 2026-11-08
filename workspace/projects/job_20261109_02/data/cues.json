@@ -1,0 +1,121 @@
+{
+ "duration": 27.876,
+ "cues": [
+  {
+   "t": 0.12,
+   "type": "inhale",
+   "dur": 1
+  },
+  {
+   "t": 2.91,
+   "type": "whoosh"
+  },
+  {
+   "t": 2.96,
+   "type": "pop",
+   "gain": 0.6
+  },
+  {
+   "t": 5.551,
+   "type": "whoosh"
+  },
+  {
+   "t": 5.751,
+   "type": "whoosh"
+  },
+  {
+   "t": 5.751,
+   "type": "slide",
+   "dur": 1.5789999999999997,
+   "gain": 0.5
+  },
+  {
+   "t": 5.801,
+   "type": "pop",
+   "gain": 0.5
+  },
+  {
+   "t": 7.33,
+   "type": "whoosh"
+  },
+  {
+   "t": 7.43,
+   "type": "bubbles",
+   "dur": 4.289999999999999
+  },
+  {
+   "t": 11.62,
+   "type": "whoosh"
+  },
+  {
+   "t": 11.82,
+   "type": "alarm",
+   "dur": 1.4500000000000004
+  },
+  {
+   "t": 13.27,
+   "type": "whoosh"
+  },
+  {
+   "t": 13.52,
+   "type": "thud",
+   "gain": 0.45
+  },
+  {
+   "t": 14.14,
+   "type": "thud",
+   "gain": 0.45
+  },
+  {
+   "t": 14.76,
+   "type": "thud",
+   "gain": 0.45
+  },
+  {
+   "t": 15.187,
+   "type": "whoosh"
+  },
+  {
+   "t": 15.337,
+   "type": "heartbeat"
+  },
+  {
+   "t": 15.837,
+   "type": "heartbeat"
+  },
+  {
+   "t": 16.427,
+   "type": "heartbeat"
+  },
+  {
+   "t": 17.123,
+   "type": "heartbeat"
+  },
+  {
+   "t": 18.2,
+   "type": "slide",
+   "dur": 1.2,
+   "gain": 0.5
+  },
+  {
+   "t": 22.1,
+   "type": "inhale",
+   "dur": 1
+  },
+  {
+   "t": 23.7,
+   "type": "inhale",
+   "dur": 1,
+   "gain": 0.7
+  },
+  {
+   "t": 25.047,
+   "type": "whoosh"
+  },
+  {
+   "t": 25.297,
+   "type": "slam",
+   "gain": 0.7
+  }
+ ]
+}

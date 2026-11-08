@@ -1,0 +1,67 @@
+{
+ "duration": 27.876,
+ "voice": "am_michael",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Did you know why your brain shrinks during sleep?",
+   "start": 0.3,
+   "end": 2.79
+  },
+  {
+   "i": 1,
+   "text": "Scientists recently confirmed that why your",
+   "start": 2.99,
+   "end": 5.631
+  },
+  {
+   "i": 2,
+   "text": "brain shrinks during sleep is much",
+   "start": 5.631,
+   "end": 7.34
+  },
+  {
+   "i": 3,
+   "text": "stranger than anyone expected. Specifically, every",
+   "start": 7.41,
+   "end": 11.23
+  },
+  {
+   "i": 4,
+   "text": "night, brain cells physically shrink by",
+   "start": 11.7,
+   "end": 13.24
+  },
+  {
+   "i": 5,
+   "text": "up to 60 percent to allow",
+   "start": 13.35,
+   "end": 15.267
+  },
+  {
+   "i": 6,
+   "text": "cerebrospinal fluid to flush out toxic",
+   "start": 15.267,
+   "end": 17.89
+  },
+  {
+   "i": 7,
+   "text": "proteins.. This biological process operates completely",
+   "start": 18.0,
+   "end": 21.82
+  },
+  {
+   "i": 8,
+   "text": "unnoticed.. It turns out nature always",
+   "start": 21.9,
+   "end": 25.127
+  },
+  {
+   "i": 9,
+   "text": "has one last trick up its sleeve.",
+   "start": 25.127,
+   "end": 27.056
+  }
+ ]
+}

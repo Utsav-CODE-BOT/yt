@@ -1,0 +1,46 @@
+application:
+  name: Faceless Shorts OS
+  timezone: Asia/Kolkata
+  daily_target: 3
+  target_duration_seconds: 25
+  minimum_duration_seconds: 22
+  maximum_duration_seconds: 28
+
+automation:
+  enabled: true
+  auto_start: true
+  publishing_mode: semi_automatic
+  retry_limit: 3
+
+content:
+  multi_niche: true
+  originality_check: true
+  factual_verification: true
+  minimum_topic_candidates: 15
+  ollama_model: gemma4:latest
+  ollama_host: http://127.0.0.1:11434
+
+production:
+  resolution: 1080x1920
+  fps: 30
+  format: mp4
+  engine_path: C:/Users/ud127/.claude/skills/faceless-shorts
+  workspace_dir: C:/Users/ud127/faceless-shorts-factory/workspace
+
+publishing:
+  platform: youtube
+  privacy_status: private
+  require_upload_verification: true
+  credentials_file: C:/Users/ud127/faceless-shorts-factory/publishing/client_secret.json
+  token_file: C:/Users/ud127/faceless-shorts-factory/publishing/token.json
+
+storage:
+  cleanup_enabled: true
+  cleanup_grace_hours: 24
+  delete_only_verified_uploads: true
+  preserve_project_files: true
+
+analytics:
+  enabled: true
+  daily_report: true
+  weekly_report: true

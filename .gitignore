@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Environment and sensitive credentials
+credentials/*.json
+!credentials/client_secret.sample.json
+.env
+*.pem
+*.key
+
+# Temporary operational storage & database
+workspace/factory.db
+workspace/logs/*.log
+workspace/exports/pending/*.mp4
+workspace/exports/uploaded/*.mp4
+workspace/projects/*/renders/*.mp4
+workspace/projects/*/data/*.wav
+workspace/projects/*/review/*.jpg
+
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
