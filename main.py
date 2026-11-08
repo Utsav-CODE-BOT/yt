@@ -57,10 +57,21 @@ def main() -> None:
         action="store_true",
         help="Display summary of recent factory jobs and production metrics",
     )
+    parser.add_argument(
+        "--login-youtube",
+        action="store_true",
+        help="Run interactive one-time YouTube OAuth authorization to connect your channel",
+    )
 
     args = parser.parse_args()
 
     orchestrator = DailyOrchestrator(factory_root=ROOT)
+
+    if args.login_youtube:
+        from publishing.youtube_auth import YouTubeAuth
+        auth = YouTubeAuth(credentials_dir=ROOT / "credentials")
+        auth.interactive_login()
+        return
 
     if args.install_task:
         scheduler = Scheduler(target_time_str="09:00", timezone_name="Asia/Kolkata")
