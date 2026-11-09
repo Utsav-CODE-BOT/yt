@@ -62,6 +62,11 @@ def main() -> None:
         action="store_true",
         help="Run interactive one-time YouTube OAuth authorization to connect your channel",
     )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force produce a fresh 3-video batch even if today's slots are already completed",
+    )
 
     args = parser.parse_args()
 
@@ -111,7 +116,7 @@ def main() -> None:
 
     # Default action: run daily batch
     print("\nStarting Autonomous Faceless Shorts Factory batch execution...")
-    result = orchestrator.run_daily_batch(target_date=args.date)
+    result = orchestrator.run_daily_batch(target_date=args.date, force=args.force)
     print("\nBatch run finished!")
     print(f"Date: {result['date']}")
     print(f"Jobs Succeeded: {result['jobs_succeeded']} / {result['jobs_executed']}")

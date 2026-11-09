@@ -31,16 +31,18 @@ class JobQueue:
         self,
         date_str: Optional[str] = None,
         slots: Optional[List[Dict[str, str]]] = None,
+        force: bool = False,
     ) -> List[Dict[str, Any]]:
         """Ensure exactly 3 distinct slots exist in SQLite for the specified day.
 
         slots is an optional list of dictionaries with 'niche' and 'pillar'.
         If omitted, defaults are supplied from configuration.
+        If force=True, creates a fresh additional batch of 3 slots for today.
         """
         target_date = date_str or self.get_current_date_str()
         existing_jobs = self.db.get_jobs_for_date(target_date)
 
-        if len(existing_jobs) >= 3:
+        if not force and len(existing_jobs) >= 3:
             logger.info("Daily slots for %s already exist (%d jobs found).", target_date, len(existing_jobs))
             return existing_jobs
 
@@ -56,24 +58,29 @@ class JobQueue:
                 for i, s in enumerate(slots)
             ]
 
+        batch_suffix = f"_b{len(existing_jobs)//3 + 1}" if force else ""
         created_jobs = []
         for slot_info in default_slots:
             slot_num = slot_info["slot"]
-            # Check if this slot already exists
-            found = next((j for j in existing_jobs if j["slot_number"] == slot_num), None)
-            if found:
-                created_jobs.append(found)
-                continue
+            if not force:
+                found = next((j for j in existing_jobs if j["slot_number"] == slot_num), None)
+                if found:
+                    created_jobs.append(found)
+                    continue
 
-            job_id = f"job_{target_date.replace('-', '')}_{slot_num:02d}"
+            job_id = f"job_{target_date.replace('-', '')}{batch_suffix}_{slot_num:02d}"
             job = self.db.create_job(
                 job_id=job_id,
                 date_str=target_date,
-                slot_number=slot_num,
+                slot_number=slot_num + (len(existing_jobs) if force else 0),
                 niche=slot_info["niche"],
                 pillar=slot_info["pillar"],
                 initial_status="IDLE",
             )
+            logger.info("Created daily production slot: %s (Slot %d, %s)", job_id, slot_num, slot_info["niche"])
+            created_jobs.append(job)
+
+        return created_jobs
             logger.info("Created daily production slot: %s (Slot %d, %s)", job_id, slot_num, slot_info["niche"])
             created_jobs.append(job)
 

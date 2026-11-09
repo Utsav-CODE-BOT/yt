@@ -48,13 +48,14 @@ class DailyOrchestrator:
         self,
         target_date: Optional[str] = None,
         auto_publish: bool = True,
-        privacy: str = "private",
+        privacy: str = "public",
+        force: bool = False,
     ) -> Dict[str, Any]:
         """Execute the complete daily autonomous production cycle."""
         today_str = target_date or datetime.now(self.tz).strftime("%Y-%m-%d")
         t_start = time.time()
         logger.info("=================================================================")
-        logger.info("STARTING DAILY FACTORY RUN: %s (%s)", today_str, self.timezone_name)
+        logger.info("STARTING DAILY FACTORY RUN: %s (%s) [Force=%s]", today_str, self.timezone_name, force)
         logger.info("=================================================================")
 
         # -------------------------------------------------------------
@@ -70,7 +71,7 @@ class DailyOrchestrator:
         # STEP 2: Niche Selection and Slot Initialization
         # -------------------------------------------------------------
         logger.info("Phase 2: Initializing 3 production slots with distinct niches...")
-        day_seed = int(today_str.replace("-", ""))
+        day_seed = int(today_str.replace("-", "")) + (99 if force else 0)
         selected_niches = self.niche_mgr.select_daily_niches(day_seed=day_seed)
 
         slots_config = [
@@ -78,7 +79,7 @@ class DailyOrchestrator:
             for n in selected_niches
         ]
 
-        jobs = self.job_queue.initialize_daily_slots(date_str=today_str, slots=slots_config)
+        jobs = self.job_queue.initialize_daily_slots(date_str=today_str, slots=slots_config, force=force)
         logger.info("Production queue ready: %d jobs registered.", len(jobs))
 
         # -------------------------------------------------------------
