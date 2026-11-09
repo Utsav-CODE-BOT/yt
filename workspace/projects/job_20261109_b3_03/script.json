@@ -1,0 +1,59 @@
+{
+  "title": "The Secret Speed of Sneeze Droplets",
+  "voice": "am_michael",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 0.6,
+  "gap": 0.2,
+  "lines": [
+    {
+      "text": "Did you know the secret speed of sneeze droplets?",
+      "caps": "SECRET SPEED"
+    },
+    {
+      "text": "Scientists recently confirmed that the secret",
+      "caps": "SCIENTISTS RECENTLY",
+      "gap": 0.15
+    },
+    {
+      "text": "speed of sneeze droplets is much",
+      "caps": "SPEED SNEEZE",
+      "gap": 0.15
+    },
+    {
+      "text": "stranger than anyone expected. Specifically, a",
+      "caps": "STRANGER ANYONE",
+      "gap": 0.15
+    },
+    {
+      "text": "human sneeze expels tens of thousands",
+      "caps": "HUMAN SNEEZE",
+      "gap": 0.15
+    },
+    {
+      "text": "of microscopic droplets at speeds reaching",
+      "caps": "MICROSCOPIC DROPLETS",
+      "gap": 0.15
+    },
+    {
+      "text": "up to 100 miles per hour,",
+      "caps": "MILES HOUR,",
+      "gap": 0.15
+    },
+    {
+      "text": "travelling over 8 metres.. This biological",
+      "caps": "TRAVELLING METRES..",
+      "gap": 0.15
+    },
+    {
+      "text": "process operates completely unnoticed.. It turns",
+      "caps": "PROCESS OPERATES",
+      "gap": 0.15
+    },
+    {
+      "text": "out nature always has one last trick up its sleeve.",
+      "caps": "NATURE ALWAYS",
+      "gap": 0.22
+    }
+  ]
+}

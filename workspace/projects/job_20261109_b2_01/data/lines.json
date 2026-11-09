@@ -1,0 +1,73 @@
+{
+ "duration": 29.39,
+ "voice": "af_heart",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Did you know the doorway effect: why you forget when entering a room?",
+   "start": 0.3,
+   "end": 3.706
+  },
+  {
+   "i": 1,
+   "text": "Scientists recently confirmed that the",
+   "start": 3.906,
+   "end": 5.726
+  },
+  {
+   "i": 2,
+   "text": "doorway effect: why you forget",
+   "start": 5.846,
+   "end": 8.236
+  },
+  {
+   "i": 3,
+   "text": "when entering a room is",
+   "start": 8.296,
+   "end": 9.116
+  },
+  {
+   "i": 4,
+   "text": "much stranger than anyone expected.",
+   "start": 9.366,
+   "end": 11.389
+  },
+  {
+   "i": 5,
+   "text": "Specifically, passing through a physical",
+   "start": 11.609,
+   "end": 13.779
+  },
+  {
+   "i": 6,
+   "text": "doorway triggers the brain's event",
+   "start": 13.779,
+   "end": 15.659
+  },
+  {
+   "i": 7,
+   "text": "boundary mechanism, purging working memory",
+   "start": 15.809,
+   "end": 18.559
+  },
+  {
+   "i": 8,
+   "text": "to prepare for a new",
+   "start": 18.749,
+   "end": 19.61
+  },
+  {
+   "i": 9,
+   "text": "environment.. This biological process operates",
+   "start": 19.61,
+   "end": 22.799
+  },
+  {
+   "i": 10,
+   "text": "completely unnoticed.. It turns out nature always has one last trick up its sleeve.",
+   "start": 22.879,
+   "end": 28.57
+  }
+ ]
+}

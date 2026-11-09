@@ -81,10 +81,6 @@ class JobQueue:
             created_jobs.append(job)
 
         return created_jobs
-            logger.info("Created daily production slot: %s (Slot %d, %s)", job_id, slot_num, slot_info["niche"])
-            created_jobs.append(job)
-
-        return created_jobs
 
     def get_pending_jobs(self, date_str: Optional[str] = None) -> List[Dict[str, Any]]:
         """Return incomplete jobs for the current day or recovered incomplete jobs."""

@@ -82,7 +82,7 @@ class YouTubeUploader:
             upload_id=f"upload_{job_id}",
             job_id=job_id,
             video_id=video_id,
-            channel_id="channel_default",
+            channel_id="UC4t7pg0vby58oxp39O7Egbg",
             youtube_title=metadata.title,
             youtube_description=metadata.description,
             tags=metadata.tags,

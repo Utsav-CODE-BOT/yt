@@ -56,7 +56,7 @@ async function openPage(port) {
     else if (m.method === 'Runtime.exceptionThrown') logs.push('EXCEPTION ' + (m.params.exceptionDetails.exception?.description || m.params.exceptionDetails.text));
     else if (m.method === 'Runtime.consoleAPICalled' && m.params.type === 'error') logs.push('ERROR ' + m.params.args.map((a) => a.value ?? a.description).join(' '));
   };
-  const send = (method, params = {}) => new Promise((res, rej) => { const i = ++id; pend.set(i, { res, rej }); ws.send(JSON.stringify({ id: i, method, params })); });
+  const send = (method, params = {}) => new Promise((res, rej) => { const i = ++id; const tm = setTimeout(() => { if (pend.has(i)) { pend.delete(i); rej(new Error('CDP timed out')); } }, 30000); pend.set(i, { res: (v) => { clearTimeout(tm); res(v); }, rej: (e) => { clearTimeout(tm); rej(e); } }); ws.send(JSON.stringify({ id: i, method, params })); });
   const ev = async (expr) => { const x = await send('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true }); if (x.exceptionDetails) throw new Error(x.exceptionDetails.exception?.description || x.exceptionDetails.text); return x.result.value; };
   await send('Runtime.enable');
   for (let i = 0; ; i++) {
@@ -120,3 +120,4 @@ else {
     } else console.log('modes: check · cues · sheet · frames · video · preview');
   } finally { P.close(); srv.close(); }
 }
+

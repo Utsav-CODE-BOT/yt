@@ -1,0 +1,67 @@
+{
+ "duration": 29.716,
+ "voice": "am_michael",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Did you know the secret speed of sneeze droplets?",
+   "start": 0.3,
+   "end": 3.006
+  },
+  {
+   "i": 1,
+   "text": "Scientists recently confirmed that the secret",
+   "start": 3.206,
+   "end": 5.796
+  },
+  {
+   "i": 2,
+   "text": "speed of sneeze droplets is much",
+   "start": 5.866,
+   "end": 7.986
+  },
+  {
+   "i": 3,
+   "text": "stranger than anyone expected. Specifically, a",
+   "start": 8.056,
+   "end": 10.966
+  },
+  {
+   "i": 4,
+   "text": "human sneeze expels tens of thousands",
+   "start": 11.376,
+   "end": 13.799
+  },
+  {
+   "i": 5,
+   "text": "of microscopic droplets at speeds reaching",
+   "start": 13.799,
+   "end": 16.696
+  },
+  {
+   "i": 6,
+   "text": "up to 100 miles per hour,",
+   "start": 16.786,
+   "end": 18.476
+  },
+  {
+   "i": 7,
+   "text": "travelling over 8 metres.. This biological",
+   "start": 18.926,
+   "end": 22.176
+  },
+  {
+   "i": 8,
+   "text": "process operates completely unnoticed.. It turns",
+   "start": 22.236,
+   "end": 25.692
+  },
+  {
+   "i": 9,
+   "text": "out nature always has one last trick up its sleeve.",
+   "start": 25.692,
+   "end": 28.896
+  }
+ ]
+}

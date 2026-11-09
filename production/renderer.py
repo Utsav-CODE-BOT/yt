@@ -66,14 +66,14 @@ class VideoRenderer:
 
         logger.info("[%s] Generating sound cues...", job_id)
         cmd_cues = [self.node_exe, str(capture_mjs), "cues"]
-        res_cues = subprocess.run(cmd_cues, cwd=project_dir, capture_output=True, text=True, env=env)
+        res_cues = subprocess.run(cmd_cues, cwd=project_dir, capture_output=True, text=True, env=env, timeout=60)
         if res_cues.returncode != 0:
             logger.warning("[%s] cues command stderr: %s", job_id, res_cues.stderr)
 
         # 2. Procedural audio mix: python tools/mix.py
         logger.info("[%s] Synthesizing procedural audio mix...", job_id)
         cmd_mix = [str(self.python_exe), str(mix_py)]
-        res_mix = subprocess.run(cmd_mix, cwd=project_dir, capture_output=True, text=True, env=env)
+        res_mix = subprocess.run(cmd_mix, cwd=project_dir, capture_output=True, text=True, env=env, timeout=60)
         if res_mix.returncode != 0:
             logger.warning("[%s] mix.py stderr: %s", job_id, res_mix.stderr)
 
@@ -86,17 +86,28 @@ class VideoRenderer:
         else:
             logger.info("[%s] Capturing frames via Headless Chrome to %s...", job_id, output_rel_mp4)
             cmd_render = [self.node_exe, str(capture_mjs), "video", str(output_rel_mp4)]
-            res_render = subprocess.run(cmd_render, cwd=project_dir, capture_output=True, text=True, env=env)
-            if res_render.returncode != 0:
-                logger.error("[%s] Chrome capture failed: %s\n%s", job_id, res_render.stdout, res_render.stderr)
-                raise RuntimeError(f"Headless Chrome capture failed: {res_render.stderr}")
+            try:
+                res_render = subprocess.run(cmd_render, cwd=project_dir, capture_output=True, text=True, env=env, timeout=240)
+                if res_render.returncode != 0:
+                    logger.error("[%s] Chrome capture failed: %s\n%s", job_id, res_render.stdout, res_render.stderr)
+                    raise RuntimeError(f"Headless Chrome capture failed: {res_render.stderr}")
+            except subprocess.TimeoutExpired:
+                logger.error("[%s] Chrome video capture timed out after 240s! Retrying once...", job_id)
+                if rendered_mp4.exists() and rendered_mp4.stat().st_size < 1_000_000:
+                    try:
+                        rendered_mp4.unlink()
+                    except Exception:
+                        pass
+                res_render = subprocess.run(cmd_render, cwd=project_dir, capture_output=True, text=True, env=env, timeout=240)
+                if res_render.returncode != 0:
+                    raise RuntimeError(f"Headless Chrome capture retry failed: {res_render.stderr}")
 
         # 4. Generate contact sheet: node tools/capture.mjs sheet review/all.jpg
         review_sheet = project_dir / "review" / "all.jpg"
         if not review_sheet.exists() or review_sheet.stat().st_size < 10_000:
             logger.info("[%s] Generating visual review sheet...", job_id)
             cmd_sheet = [self.node_exe, str(capture_mjs), "sheet", "review/all.jpg"]
-            subprocess.run(cmd_sheet, cwd=project_dir, capture_output=True, text=True, env=env)
+            subprocess.run(cmd_sheet, cwd=project_dir, capture_output=True, text=True, env=env, timeout=120)
 
         rendered_mp4 = project_dir / output_rel_mp4
         if not rendered_mp4.exists() or rendered_mp4.stat().st_size < 100_000:

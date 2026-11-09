@@ -1,0 +1,79 @@
+{
+ "duration": 22.089,
+ "voice": "am_puck",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Could anything survive a rain of liquid glass?",
+   "start": 0.3,
+   "end": 2.474
+  },
+  {
+   "i": 1,
+   "text": "Imagine a world like",
+   "start": 2.674,
+   "end": 3.671
+  },
+  {
+   "i": 2,
+   "text": "HD 189733b, where silicate",
+   "start": 3.671,
+   "end": 8.118
+  },
+  {
+   "i": 3,
+   "text": "glass rains down at",
+   "start": 8.118,
+   "end": 8.954
+  },
+  {
+   "i": 4,
+   "text": "supersonic speeds. The atmosphere",
+   "start": 9.014,
+   "end": 10.657
+  },
+  {
+   "i": 5,
+   "text": "is constantly scoured by",
+   "start": 10.657,
+   "end": 11.994
+  },
+  {
+   "i": 6,
+   "text": "5,400 mph winds. This",
+   "start": 12.074,
+   "end": 14.464
+  },
+  {
+   "i": 7,
+   "text": "extreme environment suggests life,",
+   "start": 14.464,
+   "end": 16.034
+  },
+  {
+   "i": 8,
+   "text": "as we know it,",
+   "start": 16.124,
+   "end": 16.704
+  },
+  {
+   "i": 9,
+   "text": "is impossible. It forces",
+   "start": 16.784,
+   "end": 17.954
+  },
+  {
+   "i": 10,
+   "text": "us to question the",
+   "start": 18.044,
+   "end": 19.254
+  },
+  {
+   "i": 11,
+   "text": "very limits of biological resilience.",
+   "start": 19.254,
+   "end": 21.269
+  }
+ ]
+}
