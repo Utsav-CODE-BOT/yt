@@ -1,0 +1,73 @@
+{
+ "duration": 28.167,
+ "voice": "af_heart",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Did you know the true cause of muscle soreness?",
+   "start": 0.3,
+   "end": 2.387
+  },
+  {
+   "i": 1,
+   "text": "Scientists recently confirmed that the",
+   "start": 2.587,
+   "end": 4.804
+  },
+  {
+   "i": 2,
+   "text": "true cause of muscle soreness",
+   "start": 4.804,
+   "end": 6.057
+  },
+  {
+   "i": 3,
+   "text": "is much stranger than anyone",
+   "start": 6.357,
+   "end": 8.227
+  },
+  {
+   "i": 4,
+   "text": "expected. Specifically, lactic acid clears",
+   "start": 8.327,
+   "end": 10.887
+  },
+  {
+   "i": 5,
+   "text": "out within an hour after",
+   "start": 10.957,
+   "end": 12.613
+  },
+  {
+   "i": 6,
+   "text": "exercise. doms is actually caused",
+   "start": 12.613,
+   "end": 15.076
+  },
+  {
+   "i": 7,
+   "text": "by microscopic tears in the",
+   "start": 15.076,
+   "end": 16.787
+  },
+  {
+   "i": 8,
+   "text": "myofibrils and localized inflammation.. This",
+   "start": 17.047,
+   "end": 19.577
+  },
+  {
+   "i": 9,
+   "text": "biological process operates completely unnoticed..",
+   "start": 20.217,
+   "end": 23.765
+  },
+  {
+   "i": 10,
+   "text": "It turns out nature always has one last trick up its sleeve.",
+   "start": 23.985,
+   "end": 27.347
+  }
+ ]
+}

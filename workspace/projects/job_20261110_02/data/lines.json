@@ -1,0 +1,79 @@
+{
+ "duration": 27.16,
+ "voice": "am_puck",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Did you know the sound of a black hole singularity?",
+   "start": 0.3,
+   "end": 2.763
+  },
+  {
+   "i": 1,
+   "text": "Scientists recently confirmed that",
+   "start": 2.963,
+   "end": 4.855
+  },
+  {
+   "i": 2,
+   "text": "the sound of a",
+   "start": 4.855,
+   "end": 5.686
+  },
+  {
+   "i": 3,
+   "text": "black hole singularity is",
+   "start": 5.686,
+   "end": 7.307
+  },
+  {
+   "i": 4,
+   "text": "much stranger than anyone",
+   "start": 7.307,
+   "end": 8.563
+  },
+  {
+   "i": 5,
+   "text": "expected. Specifically, in 2022,",
+   "start": 8.623,
+   "end": 11.673
+  },
+  {
+   "i": 6,
+   "text": "nasa sonified acoustic pressure",
+   "start": 11.763,
+   "end": 13.678
+  },
+  {
+   "i": 7,
+   "text": "waves rippling through perseus",
+   "start": 13.678,
+   "end": 15.243
+  },
+  {
+   "i": 8,
+   "text": "galaxy cluster gas, 57",
+   "start": 15.243,
+   "end": 17.533
+  },
+  {
+   "i": 9,
+   "text": "octaves below middle c..",
+   "start": 17.623,
+   "end": 18.837
+  },
+  {
+   "i": 10,
+   "text": "This biological process operates",
+   "start": 19.057,
+   "end": 21.142
+  },
+  {
+   "i": 11,
+   "text": "completely unnoticed.. It turns out nature always has one last trick up its sleeve.",
+   "start": 21.142,
+   "end": 26.34
+  }
+ ]
+}

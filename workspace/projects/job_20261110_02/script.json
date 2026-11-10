@@ -1,0 +1,69 @@
+{
+  "title": "The Sound of a Black Hole Singularity",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 0.6,
+  "gap": 0.2,
+  "lines": [
+    {
+      "text": "Did you know the sound of a black hole singularity?",
+      "caps": "SOUND BLACK"
+    },
+    {
+      "text": "Scientists recently confirmed that",
+      "caps": "SCIENTISTS RECENTLY",
+      "gap": 0.15
+    },
+    {
+      "text": "the sound of a",
+      "caps": "SOUND",
+      "gap": 0.15
+    },
+    {
+      "text": "black hole singularity is",
+      "caps": "BLACK SINGULARITY",
+      "gap": 0.15
+    },
+    {
+      "text": "much stranger than anyone",
+      "caps": "STRANGER ANYONE",
+      "gap": 0.15
+    },
+    {
+      "text": "expected. Specifically, in 2022,",
+      "caps": "EXPECTED. SPECIFICALLY,",
+      "gap": 0.15
+    },
+    {
+      "text": "nasa sonified acoustic pressure",
+      "caps": "SONIFIED ACOUSTIC",
+      "gap": 0.15
+    },
+    {
+      "text": "waves rippling through perseus",
+      "caps": "WAVES RIPPLING",
+      "gap": 0.15
+    },
+    {
+      "text": "galaxy cluster gas, 57",
+      "caps": "GALAXY CLUSTER",
+      "gap": 0.15
+    },
+    {
+      "text": "octaves below middle c..",
+      "caps": "OCTAVES BELOW",
+      "gap": 0.22
+    },
+    {
+      "text": "This biological process operates",
+      "caps": "BIOLOGICAL PROCESS",
+      "gap": 0.15
+    },
+    {
+      "text": "completely unnoticed.. It turns out nature always has one last trick up its sleeve.",
+      "caps": "COMPLETELY UNNOTICED..",
+      "gap": 0.22
+    }
+  ]
+}

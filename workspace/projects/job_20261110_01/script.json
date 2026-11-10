@@ -1,0 +1,59 @@
+{
+  "title": "The Bone Stronger Than Concrete",
+  "voice": "am_michael",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 0.6,
+  "gap": 0.2,
+  "lines": [
+    {
+      "text": "Did you know the bone stronger than concrete?",
+      "caps": "STRONGER CONCRETE?"
+    },
+    {
+      "text": "Scientists recently confirmed that the bone",
+      "caps": "SCIENTISTS RECENTLY",
+      "gap": 0.15
+    },
+    {
+      "text": "stronger than concrete is much stranger",
+      "caps": "STRONGER CONCRETE",
+      "gap": 0.15
+    },
+    {
+      "text": "than anyone expected. Specifically, ounce for",
+      "caps": "ANYONE EXPECTED.",
+      "gap": 0.15
+    },
+    {
+      "text": "ounce, human bone is four times",
+      "caps": "OUNCE, HUMAN",
+      "gap": 0.15
+    },
+    {
+      "text": "stronger than concrete, able to support",
+      "caps": "STRONGER CONCRETE,",
+      "gap": 0.15
+    },
+    {
+      "text": "up to 9 tonnes of compressive",
+      "caps": "TONNES COMPRESSIVE",
+      "gap": 0.15
+    },
+    {
+      "text": "force before fracturing.. This biological process",
+      "caps": "FORCE BEFORE",
+      "gap": 0.15
+    },
+    {
+      "text": "operates completely unnoticed.. It turns out",
+      "caps": "OPERATES COMPLETELY",
+      "gap": 0.15
+    },
+    {
+      "text": "nature always has one last trick up its sleeve.",
+      "caps": "NATURE ALWAYS",
+      "gap": 0.22
+    }
+  ]
+}

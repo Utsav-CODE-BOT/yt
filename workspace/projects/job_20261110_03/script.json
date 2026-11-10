@@ -1,0 +1,64 @@
+{
+  "title": "The True Cause of Muscle Soreness",
+  "voice": "af_heart",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 0.6,
+  "gap": 0.2,
+  "lines": [
+    {
+      "text": "Did you know the true cause of muscle soreness?",
+      "caps": "CAUSE MUSCLE"
+    },
+    {
+      "text": "Scientists recently confirmed that the",
+      "caps": "SCIENTISTS RECENTLY",
+      "gap": 0.15
+    },
+    {
+      "text": "true cause of muscle soreness",
+      "caps": "CAUSE MUSCLE",
+      "gap": 0.15
+    },
+    {
+      "text": "is much stranger than anyone",
+      "caps": "STRANGER ANYONE",
+      "gap": 0.15
+    },
+    {
+      "text": "expected. Specifically, lactic acid clears",
+      "caps": "EXPECTED. SPECIFICALLY,",
+      "gap": 0.15
+    },
+    {
+      "text": "out within an hour after",
+      "caps": "WITHIN AFTER",
+      "gap": 0.15
+    },
+    {
+      "text": "exercise. doms is actually caused",
+      "caps": "EXERCISE. ACTUALLY",
+      "gap": 0.15
+    },
+    {
+      "text": "by microscopic tears in the",
+      "caps": "MICROSCOPIC TEARS",
+      "gap": 0.15
+    },
+    {
+      "text": "myofibrils and localized inflammation.. This",
+      "caps": "MYOFIBRILS LOCALIZED",
+      "gap": 0.15
+    },
+    {
+      "text": "biological process operates completely unnoticed..",
+      "caps": "BIOLOGICAL PROCESS",
+      "gap": 0.22
+    },
+    {
+      "text": "It turns out nature always has one last trick up its sleeve.",
+      "caps": "TURNS NATURE",
+      "gap": 0.22
+    }
+  ]
+}
