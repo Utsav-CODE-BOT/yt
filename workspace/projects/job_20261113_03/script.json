@@ -1,0 +1,99 @@
+{
+  "title": "The Stolen Mona Lisa and the World's Biggest Manhunt",
+  "voice": "am_michael",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 0.6,
+  "gap": 0.2,
+  "lines": [
+    {
+      "text": "Did you know the stolen mona lisa and the world's biggest manhunt?",
+      "caps": "STOLEN WORLD'S"
+    },
+    {
+      "text": "Scientists recently confirmed",
+      "caps": "SCIENTISTS RECENTLY",
+      "gap": 0.15
+    },
+    {
+      "text": "that the stolen",
+      "caps": "STOLEN",
+      "gap": 0.15
+    },
+    {
+      "text": "mona lisa and",
+      "caps": "MONA",
+      "gap": 0.15
+    },
+    {
+      "text": "the world's biggest",
+      "caps": "WORLD'S BIGGEST",
+      "gap": 0.15
+    },
+    {
+      "text": "manhunt is much",
+      "caps": "MANHUNT",
+      "gap": 0.15
+    },
+    {
+      "text": "stranger than anyone",
+      "caps": "STRANGER ANYONE",
+      "gap": 0.15
+    },
+    {
+      "text": "expected. Specifically, in",
+      "caps": "EXPECTED. SPECIFICALLY,",
+      "gap": 0.15
+    },
+    {
+      "text": "1911, a museum",
+      "caps": "1911, MUSEUM",
+      "gap": 0.15
+    },
+    {
+      "text": "handyman simply walked",
+      "caps": "HANDYMAN SIMPLY",
+      "gap": 0.15
+    },
+    {
+      "text": "out of the",
+      "caps": "OUT",
+      "gap": 0.15
+    },
+    {
+      "text": "louvre with the",
+      "caps": "LOUVRE",
+      "gap": 0.15
+    },
+    {
+      "text": "mona lisa hidden",
+      "caps": "HIDDEN",
+      "gap": 0.15
+    },
+    {
+      "text": "under his coat,",
+      "caps": "UNDER COAT,",
+      "gap": 0.15
+    },
+    {
+      "text": "making it the",
+      "caps": "MAKING",
+      "gap": 0.15
+    },
+    {
+      "text": "most famous painting",
+      "caps": "FAMOUS PAINTING",
+      "gap": 0.15
+    },
+    {
+      "text": "in history.. This",
+      "caps": "HISTORY..",
+      "gap": 0.15
+    },
+    {
+      "text": "biological process operates completely unnoticed.. It turns out nature always has one last trick up its sleeve.",
+      "caps": "BIOLOGICAL PROCESS",
+      "gap": 0.22
+    }
+  ]
+}

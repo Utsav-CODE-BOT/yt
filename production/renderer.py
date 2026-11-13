@@ -49,10 +49,16 @@ class VideoRenderer:
         self.exports_pending_dir = Path(exports_pending_dir)
         self.exports_pending_dir.mkdir(parents=True, exist_ok=True)
 
-    def render(self, project_dir: Path, job_id: str) -> RenderResult:
-        """Execute the full rendering sequence for a project."""
+    def render(
+        self,
+        project_dir: Path,
+        job_id: str,
+        output_filename: Optional[str] = None,
+    ) -> RenderResult:
+        """Execute the full rendering sequence for a project or language variant."""
         t_start = time.time()
-        logger.info("Starting video render pipeline for job '%s'...", job_id)
+        tag = output_filename or job_id
+        logger.info("Starting video render pipeline for '%s'...", tag)
 
         env = dict(os.environ)
         env["PYTHONUTF8"] = "1"
@@ -64,48 +70,48 @@ class VideoRenderer:
         capture_mjs = project_dir / "tools" / "capture.mjs"
         mix_py = project_dir / "tools" / "mix.py"
 
-        logger.info("[%s] Generating sound cues...", job_id)
+        logger.info("[%s] Generating sound cues...", tag)
         cmd_cues = [self.node_exe, str(capture_mjs), "cues"]
         res_cues = subprocess.run(cmd_cues, cwd=project_dir, capture_output=True, text=True, env=env, timeout=60)
         if res_cues.returncode != 0:
-            logger.warning("[%s] cues command stderr: %s", job_id, res_cues.stderr)
+            logger.warning("[%s] cues command stderr: %s", tag, res_cues.stderr)
 
         # 2. Procedural audio mix: python tools/mix.py
-        logger.info("[%s] Synthesizing procedural audio mix...", job_id)
+        logger.info("[%s] Synthesizing procedural audio mix...", tag)
         cmd_mix = [str(self.python_exe), str(mix_py)]
         res_mix = subprocess.run(cmd_mix, cwd=project_dir, capture_output=True, text=True, env=env, timeout=60)
         if res_mix.returncode != 0:
-            logger.warning("[%s] mix.py stderr: %s", job_id, res_mix.stderr)
+            logger.warning("[%s] mix.py stderr: %s", tag, res_mix.stderr)
 
-        # 3. Render video in Headless Chrome: node tools/capture.mjs video renders/{job_id}.mp4
-        output_rel_mp4 = Path("renders") / f"{job_id}.mp4"
+        # 3. Render video in Headless Chrome: node tools/capture.mjs video renders/{output_filename or job_id}.mp4
+        output_rel_mp4 = Path("renders") / (output_filename or f"{job_id}.mp4")
         rendered_mp4 = project_dir / output_rel_mp4
 
         if rendered_mp4.exists() and rendered_mp4.stat().st_size > 1_000_000:
-            logger.info("[%s] Existing rendered MP4 found (%.1f MB). Skipping re-capture.", job_id, rendered_mp4.stat().st_size / (1024 * 1024))
+            logger.info("[%s] Existing rendered MP4 found (%.1f MB). Skipping re-capture.", tag, rendered_mp4.stat().st_size / (1024 * 1024))
         else:
-            logger.info("[%s] Capturing frames via Headless Chrome to %s...", job_id, output_rel_mp4)
+            logger.info("[%s] Capturing frames via Headless Chrome to %s...", tag, output_rel_mp4)
             cmd_render = [self.node_exe, str(capture_mjs), "video", str(output_rel_mp4)]
             try:
-                res_render = subprocess.run(cmd_render, cwd=project_dir, capture_output=True, text=True, env=env, timeout=240)
+                res_render = subprocess.run(cmd_render, cwd=project_dir, capture_output=True, text=True, env=env, timeout=420)
                 if res_render.returncode != 0:
-                    logger.error("[%s] Chrome capture failed: %s\n%s", job_id, res_render.stdout, res_render.stderr)
+                    logger.error("[%s] Chrome capture failed: %s\n%s", tag, res_render.stdout, res_render.stderr)
                     raise RuntimeError(f"Headless Chrome capture failed: {res_render.stderr}")
             except subprocess.TimeoutExpired:
-                logger.error("[%s] Chrome video capture timed out after 240s! Retrying once...", job_id)
+                logger.error("[%s] Chrome video capture timed out after 420s! Retrying once...", tag)
                 if rendered_mp4.exists() and rendered_mp4.stat().st_size < 1_000_000:
                     try:
                         rendered_mp4.unlink()
                     except Exception:
                         pass
-                res_render = subprocess.run(cmd_render, cwd=project_dir, capture_output=True, text=True, env=env, timeout=240)
+                res_render = subprocess.run(cmd_render, cwd=project_dir, capture_output=True, text=True, env=env, timeout=420)
                 if res_render.returncode != 0:
                     raise RuntimeError(f"Headless Chrome capture retry failed: {res_render.stderr}")
 
         # 4. Generate contact sheet: node tools/capture.mjs sheet review/all.jpg
         review_sheet = project_dir / "review" / "all.jpg"
         if not review_sheet.exists() or review_sheet.stat().st_size < 10_000:
-            logger.info("[%s] Generating visual review sheet...", job_id)
+            logger.info("[%s] Generating visual review sheet...", tag)
             cmd_sheet = [self.node_exe, str(capture_mjs), "sheet", "review/all.jpg"]
             subprocess.run(cmd_sheet, cwd=project_dir, capture_output=True, text=True, env=env, timeout=120)
 
@@ -116,14 +122,14 @@ class VideoRenderer:
         # 5. Extract video metadata via ffprobe or ffmpeg
         meta = self._probe_video(rendered_mp4)
 
-        # 6. Copy to workspace/exports/pending/{job_id}.mp4
-        export_dest = self.exports_pending_dir / f"{job_id}.mp4"
+        # 6. Copy to workspace/exports/pending/{output_filename or job_id}.mp4
+        export_dest = self.exports_pending_dir / output_rel_mp4.name
         shutil.copy2(rendered_mp4, export_dest)
 
         t_elapsed = time.time() - t_start
         logger.info(
-            "Render complete for job '%s': %.1fs video rendered in %.1fs (Size: %.1f MB). Exported to %s",
-            job_id,
+            "Render complete for '%s': %.1fs video rendered in %.1fs (Size: %.1f MB). Exported to %s",
+            tag,
             meta.get("duration", 0.0),
             t_elapsed,
             export_dest.stat().st_size / (1024 * 1024),

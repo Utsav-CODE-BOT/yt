@@ -1,0 +1,64 @@
+{
+  "title": "The Immortal Jellyfish That Reverses Aging",
+  "voice": "af_heart",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 0.6,
+  "gap": 0.2,
+  "lines": [
+    {
+      "text": "Did you know the immortal jellyfish that reverses aging?",
+      "caps": "IMMORTAL JELLYFISH"
+    },
+    {
+      "text": "Scientists recently confirmed that the",
+      "caps": "SCIENTISTS RECENTLY",
+      "gap": 0.15
+    },
+    {
+      "text": "immortal jellyfish that reverses aging",
+      "caps": "IMMORTAL JELLYFISH",
+      "gap": 0.15
+    },
+    {
+      "text": "is much stranger than anyone",
+      "caps": "STRANGER ANYONE",
+      "gap": 0.15
+    },
+    {
+      "text": "expected. Specifically, turritopsis dohrnii can",
+      "caps": "EXPECTED. SPECIFICALLY,",
+      "gap": 0.15
+    },
+    {
+      "text": "revert its mature cells back",
+      "caps": "REVERT MATURE",
+      "gap": 0.15
+    },
+    {
+      "text": "into polyp infancy when injured",
+      "caps": "POLYP INFANCY",
+      "gap": 0.15
+    },
+    {
+      "text": "or starving, repeating the cycle",
+      "caps": "STARVING, REPEATING",
+      "gap": 0.15
+    },
+    {
+      "text": "indefinitely.. This biological process operates",
+      "caps": "INDEFINITELY.. BIOLOGICAL",
+      "gap": 0.15
+    },
+    {
+      "text": "completely unnoticed.. It turns out",
+      "caps": "COMPLETELY UNNOTICED..",
+      "gap": 0.15
+    },
+    {
+      "text": "nature always has one last trick up its sleeve.",
+      "caps": "NATURE ALWAYS",
+      "gap": 0.22
+    }
+  ]
+}

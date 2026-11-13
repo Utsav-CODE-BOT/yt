@@ -1,0 +1,79 @@
+{
+ "duration": 22.739,
+ "voice": "am_puck",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Did you know the rule of 3s in wilderness survival?",
+   "start": 0.3,
+   "end": 2.914
+  },
+  {
+   "i": 1,
+   "text": "Scientists recently confirmed that the",
+   "start": 3.114,
+   "end": 4.974
+  },
+  {
+   "i": 2,
+   "text": "rule of 3s in wilderness",
+   "start": 5.064,
+   "end": 6.111
+  },
+  {
+   "i": 3,
+   "text": "survival is much stranger than",
+   "start": 6.111,
+   "end": 7.854
+  },
+  {
+   "i": 4,
+   "text": "anyone expected. Specifically, a human",
+   "start": 7.924,
+   "end": 9.469
+  },
+  {
+   "i": 5,
+   "text": "can survive 3 minutes without",
+   "start": 9.469,
+   "end": 10.797
+  },
+  {
+   "i": 6,
+   "text": "oxygen, 3 hours without shelter",
+   "start": 10.797,
+   "end": 12.462
+  },
+  {
+   "i": 7,
+   "text": "in extreme cold, 3 days",
+   "start": 12.462,
+   "end": 13.464
+  },
+  {
+   "i": 8,
+   "text": "without water, and 3 weeks",
+   "start": 13.634,
+   "end": 14.644
+  },
+  {
+   "i": 9,
+   "text": "without food.. This biological process",
+   "start": 14.714,
+   "end": 17.105
+  },
+  {
+   "i": 10,
+   "text": "operates completely unnoticed.. It turns",
+   "start": 17.105,
+   "end": 18.894
+  },
+  {
+   "i": 11,
+   "text": "out nature always has one last trick up its sleeve.",
+   "start": 19.274,
+   "end": 21.919
+  }
+ ]
+}

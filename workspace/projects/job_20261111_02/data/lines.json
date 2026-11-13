@@ -1,0 +1,73 @@
+{
+ "duration": 29.237,
+ "voice": "af_heart",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Did you know the bystander effect and the 3-second rule?",
+   "start": 0.3,
+   "end": 3.178
+  },
+  {
+   "i": 1,
+   "text": "Scientists recently confirmed that the",
+   "start": 3.378,
+   "end": 5.529
+  },
+  {
+   "i": 2,
+   "text": "bystander effect and the 3-second",
+   "start": 5.529,
+   "end": 7.549
+  },
+  {
+   "i": 3,
+   "text": "rule is much stranger than",
+   "start": 7.549,
+   "end": 9.028
+  },
+  {
+   "i": 4,
+   "text": "anyone expected. Specifically, in an",
+   "start": 9.028,
+   "end": 11.028
+  },
+  {
+   "i": 5,
+   "text": "emergency, crowds freeze due to",
+   "start": 11.248,
+   "end": 13.607
+  },
+  {
+   "i": 6,
+   "text": "diffusion of responsibility. pointing directly",
+   "start": 13.607,
+   "end": 16.378
+  },
+  {
+   "i": 7,
+   "text": "at one single person breaks",
+   "start": 16.438,
+   "end": 17.888
+  },
+  {
+   "i": 8,
+   "text": "the psychological paralysis instantly.. This",
+   "start": 18.198,
+   "end": 21.468
+  },
+  {
+   "i": 9,
+   "text": "biological process operates completely unnoticed..",
+   "start": 21.558,
+   "end": 24.835
+  },
+  {
+   "i": 10,
+   "text": "It turns out nature always has one last trick up its sleeve.",
+   "start": 25.055,
+   "end": 28.417
+  }
+ ]
+}

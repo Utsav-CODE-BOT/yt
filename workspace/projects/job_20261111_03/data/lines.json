@@ -1,0 +1,79 @@
+{
+ "duration": 18.535,
+ "voice": "am_puck",
+ "speed": 1.05,
+ "lines": [
+  {
+   "i": 0,
+   "text": "Did you know the dancing plague of 1518?",
+   "start": 0.3,
+   "end": 3.679
+  },
+  {
+   "i": 1,
+   "text": "Hundreds of people",
+   "start": 3.879,
+   "end": 5.249
+  },
+  {
+   "i": 2,
+   "text": "in Strasbourg suddenly",
+   "start": 5.309,
+   "end": 6.185
+  },
+  {
+   "i": 3,
+   "text": "started dancing uncontrollably",
+   "start": 6.185,
+   "end": 7.802
+  },
+  {
+   "i": 4,
+   "text": "in the streets.",
+   "start": 7.802,
+   "end": 8.607
+  },
+  {
+   "i": 5,
+   "text": "They danced for",
+   "start": 8.827,
+   "end": 9.768
+  },
+  {
+   "i": 6,
+   "text": "weeks, eventually collapsing",
+   "start": 9.768,
+   "end": 11.359
+  },
+  {
+   "i": 7,
+   "text": "from exhaustion and",
+   "start": 11.359,
+   "end": 12.337
+  },
+  {
+   "i": 8,
+   "text": "heart failure. Experts",
+   "start": 12.477,
+   "end": 14.009
+  },
+  {
+   "i": 9,
+   "text": "now believe mass",
+   "start": 14.009,
+   "end": 15.004
+  },
+  {
+   "i": 10,
+   "text": "hysteria, triggered by",
+   "start": 15.004,
+   "end": 15.947
+  },
+  {
+   "i": 11,
+   "text": "fear and stress, was the cause.",
+   "start": 16.027,
+   "end": 17.715
+  }
+ ]
+}

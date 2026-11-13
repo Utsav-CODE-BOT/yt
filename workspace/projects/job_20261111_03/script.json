@@ -1,0 +1,69 @@
+{
+  "title": "The Dancing Plague of 1518",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 0.6,
+  "gap": 0.2,
+  "lines": [
+    {
+      "text": "Did you know the dancing plague of 1518?",
+      "caps": "DANCING PLAGUE"
+    },
+    {
+      "text": "Hundreds of people",
+      "caps": "HUNDREDS PEOPLE",
+      "gap": 0.15
+    },
+    {
+      "text": "in Strasbourg suddenly",
+      "caps": "STRASBOURG SUDDENLY",
+      "gap": 0.15
+    },
+    {
+      "text": "started dancing uncontrollably",
+      "caps": "STARTED DANCING",
+      "gap": 0.15
+    },
+    {
+      "text": "in the streets.",
+      "caps": "STREETS.",
+      "gap": 0.22
+    },
+    {
+      "text": "They danced for",
+      "caps": "DANCED",
+      "gap": 0.15
+    },
+    {
+      "text": "weeks, eventually collapsing",
+      "caps": "WEEKS, EVENTUALLY",
+      "gap": 0.15
+    },
+    {
+      "text": "from exhaustion and",
+      "caps": "EXHAUSTION",
+      "gap": 0.15
+    },
+    {
+      "text": "heart failure. Experts",
+      "caps": "HEART FAILURE.",
+      "gap": 0.15
+    },
+    {
+      "text": "now believe mass",
+      "caps": "BELIEVE",
+      "gap": 0.15
+    },
+    {
+      "text": "hysteria, triggered by",
+      "caps": "HYSTERIA, TRIGGERED",
+      "gap": 0.15
+    },
+    {
+      "text": "fear and stress, was the cause.",
+      "caps": "STRESS, CAUSE.",
+      "gap": 0.22
+    }
+  ]
+}

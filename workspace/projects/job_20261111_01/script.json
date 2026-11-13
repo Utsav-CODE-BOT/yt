@@ -1,0 +1,69 @@
+{
+  "title": "The Rule of 3s in Wilderness Survival",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "lead": 0.3,
+  "outro": 0.6,
+  "gap": 0.2,
+  "lines": [
+    {
+      "text": "Did you know the rule of 3s in wilderness survival?",
+      "caps": "WILDERNESS SURVIVAL?"
+    },
+    {
+      "text": "Scientists recently confirmed that the",
+      "caps": "SCIENTISTS RECENTLY",
+      "gap": 0.15
+    },
+    {
+      "text": "rule of 3s in wilderness",
+      "caps": "WILDERNESS",
+      "gap": 0.15
+    },
+    {
+      "text": "survival is much stranger than",
+      "caps": "SURVIVAL STRANGER",
+      "gap": 0.15
+    },
+    {
+      "text": "anyone expected. Specifically, a human",
+      "caps": "ANYONE EXPECTED.",
+      "gap": 0.15
+    },
+    {
+      "text": "can survive 3 minutes without",
+      "caps": "SURVIVE MINUTES",
+      "gap": 0.15
+    },
+    {
+      "text": "oxygen, 3 hours without shelter",
+      "caps": "OXYGEN, HOURS",
+      "gap": 0.15
+    },
+    {
+      "text": "in extreme cold, 3 days",
+      "caps": "EXTREME COLD,",
+      "gap": 0.15
+    },
+    {
+      "text": "without water, and 3 weeks",
+      "caps": "WITHOUT WATER,",
+      "gap": 0.15
+    },
+    {
+      "text": "without food.. This biological process",
+      "caps": "WITHOUT FOOD..",
+      "gap": 0.15
+    },
+    {
+      "text": "operates completely unnoticed.. It turns",
+      "caps": "OPERATES COMPLETELY",
+      "gap": 0.15
+    },
+    {
+      "text": "out nature always has one last trick up its sleeve.",
+      "caps": "NATURE ALWAYS",
+      "gap": 0.22
+    }
+  ]
+}

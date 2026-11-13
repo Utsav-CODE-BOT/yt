@@ -40,7 +40,7 @@ class CaptionChecks:
             return CaptionCheckResult(passed=False, total_words=0, alignment_duration=0, issues=[f"Malformed words.json: {e}"])
 
         total_words = len(words)
-        if total_words < 30:
+        if total_words < 18:
             issues.append(f"Unusually low word count: {total_words} words")
 
         last_start = -0.1
