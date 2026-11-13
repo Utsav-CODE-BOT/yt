@@ -52,7 +52,7 @@ class MultilingualTTS:
         lines: List[Dict[str, Any]],
         language: str,
         voice_override: Optional[str] = None,
-        speed: float = 1.05,
+        speed: float = 1.0,
     ) -> TTSOutput:
         """Synthesize narration.wav, lines.json, and words.json for a specific language."""
         project_data_dir.mkdir(parents=True, exist_ok=True)
@@ -143,7 +143,13 @@ class MultilingualTTS:
                 mp3_tmp = Path(td) / f"cut_{idx}.mp3"
                 wav_tmp = Path(td) / f"cut_{idx}.wav"
 
-                communicate = edge_tts.Communicate(text, voice, rate=rate_str)
+                # Natural prosody continuation: If text doesn't end with terminal punctuation,
+                # append comma so the neural vocoder maintains natural continuing melodic inflection
+                # rather than dropping pitch flat like a machine.
+                is_terminal = bool(text[-1] in ".?!,!।")
+                spoken_text = text if is_terminal else f"{text},"
+
+                communicate = edge_tts.Communicate(spoken_text, voice, rate=rate_str)
                 await communicate.save(str(mp3_tmp))
 
                 # Normalize to 24000Hz mono WAV via ffmpeg
@@ -170,9 +176,15 @@ class MultilingualTTS:
 
                 dur = len(data) / sr
 
-                # Inter-line pause gap
+                # Context-aware pause gap:
+                # If mid-sentence clause, short fluid breathing pause (40-70ms) to avoid robotic dead silence.
+                # If full terminal sentence (. ? !), natural human sentence pause (150-200ms).
                 raw_gap = float(line.get("gap", 0.18))
-                gap = max(0.12, min(raw_gap, 0.35))
+                if is_terminal:
+                    gap = max(0.14, min(raw_gap, 0.22))
+                else:
+                    gap = 0.06  # natural human clause connection
+
                 gap_samples = int(gap * self.sample_rate)
 
                 start_t = round(current_time, 3)
@@ -190,9 +202,31 @@ class MultilingualTTS:
                 current_time += dur + gap
 
             # Outro padding
-            full_audio_chunks.append(np.zeros(int(0.50 * self.sample_rate), dtype=np.int16))
+            full_audio_chunks.append(np.zeros(int(0.40 * self.sample_rate), dtype=np.int16))
             final_audio = np.concatenate(full_audio_chunks)
             wavfile.write(str(out_wav_path), self.sample_rate, final_audio)
+
+            # Apply broadcast vocal mastering: subtle EQ warmth + studio compand + presence boost
+            mastered_wav = out_wav_path.with_name("mastered_temp.wav")
+            filter_chain = (
+                "highpass=f=80,"
+                "equalizer=f=220:t=q:w=1.2:g=1.5,"
+                "equalizer=f=3500:t=q:w=1.0:g=2.0,"
+                "compand=attacks=0.02:decays=0.2:points=-80/-80|-40/-28|-20/-10|0/-1,"
+                "volume=1.15"
+            )
+            cmd_master = [
+                self.ffmpeg_exe,
+                "-y",
+                "-v", "error",
+                "-i", str(out_wav_path),
+                "-af", filter_chain,
+                str(mastered_wav),
+            ]
+            res_m = subprocess.run(cmd_master, capture_output=True, text=True)
+            if res_m.returncode == 0 and mastered_wav.exists() and mastered_wav.stat().st_size > 1000:
+                import shutil
+                shutil.move(str(mastered_wav), str(out_wav_path))
 
             total_duration = len(final_audio) / self.sample_rate
             return line_records, total_duration

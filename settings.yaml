@@ -16,12 +16,18 @@ multilingual:
     - tamil
   tts_provider: edge-tts
   tts_fallback: gtts
-  translation_provider: multi
+  translation_provider: gtx
+  speed: 1.0
   voices:
-    kannada: kn-IN-GaganNeural
+    kannada: kn-IN-SapnaNeural
     hindi: hi-IN-MadhurNeural
     telugu: te-IN-MohanNeural
     tamil: ta-IN-ValluvarNeural
+  alternate_voices:
+    kannada_male: kn-IN-GaganNeural
+    hindi_female: hi-IN-SwaraNeural
+    telugu_female: te-IN-ShrutiNeural
+    tamil_female: ta-IN-PallaviNeural
   fonts:
     primary: Nirmala UI
     fallback: sans-serif

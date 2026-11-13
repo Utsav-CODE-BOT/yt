@@ -21,7 +21,8 @@ LANGUAGE_SPECS: Dict[str, Dict[str, Any]] = {
         "iso": "kn",
         "name": "Kannada",
         "native_name": "ಕನ್ನಡ",
-        "default_voice": "kn-IN-GaganNeural",
+        "default_voice": "kn-IN-SapnaNeural",  # Natural, expressive native conversational tone
+        "male_voice": "kn-IN-GaganNeural",
         "female_voice": "kn-IN-SapnaNeural",
         "gtts_code": "kn",
         "hashtags": ["#KannadaShorts", "#KannadaFacts", "#Kannada", "#Karnataka", "#Shorts"],
@@ -88,15 +89,107 @@ class LocalizedMetadata:
     default_audio_language: str
 
 
+def colloquialize_indic(text: str, target_lang: str) -> str:
+    """Transforms stiff textbook machine translations into natural, conversational, spoken YouTube phrases."""
+    lang = target_lang.lower().strip()
+    if lang == "kannada":
+        rules = [
+            # YouTube Shorts Hooks & Inquisitives
+            (r"ಎಂದು ನಿಮಗೆ ತಿಳಿದಿದೆಯೇ\??", "ಅಂತ ನಿಮಗೆ ಗೊತ್ತಾ?"),
+            (r"ನಿಮಗೆ ತಿಳಿದಿದೆಯೇ\??", "ನಿಮಗೆ ಗೊತ್ತಾ?"),
+            (r"ಯೋಚಿಸಿದ್ದೀರಾ\??", "ಯೋಚನೆ ಮಾಡಿದ್ದೀರಾ?"),
+            (r"ತಿಳಿದಿದೆ", "ಗೊತ್ತಿದೆ"),
+            # Conversational verb suffixes: -ತ್ತದೆ -> -ತ್ತೆ
+            (r"ತಿರುಗುತ್ತದೆ", "ತಿರುಗುತ್ತೆ"),
+            (r"ಆಗುತ್ತದೆ", "ಆಗುತ್ತೆ"),
+            (r"ಇರುತ್ತದೆ", "ಇರುತ್ತೆ"),
+            (r"ಬರುತ್ತದೆ", "ಬರುತ್ತೆ"),
+            (r"ಕಾಣುತ್ತದೆ", "ಕಾಣುತ್ತೆ"),
+            (r"ಹೋಗುತ್ತದೆ", "ಹೋಗುತ್ತೆ"),
+            (r"ಮಾಡುತ್ತದೆ", "ಮಾಡುತ್ತೆ"),
+            (r"ನಡೆಯುತ್ತದೆ", "ನಡೆಯುತ್ತೆ"),
+            (r"ತೂಗುತ್ತದೆ", "ತೂಗುತ್ತೆ"),
+            (r"ತಲುಪುತ್ತದೆ", "ತಲುಪುತ್ತೆ"),
+            (r"ಉಳಿಯುತ್ತದೆ", "ಉಳಿಯುತ್ತೆ"),
+            (r"ಸಾಯುತ್ತದೆ", "ಸಾಯುತ್ತೆ"),
+            (r"ಹುಟ್ಟುತ್ತದೆ", "ಹುಟ್ಟುತ್ತೆ"),
+            (r"ಬೆಳೆಯುತ್ತದೆ", "ಬೆಳೆಯುತ್ತೆ"),
+            (r"ಕರಗುತ್ತದೆ", "ಕರಗುತ್ತೆ"),
+            (r"ಕಂಡುಬರುತ್ತದೆ", "ಕಂಡುಬರುತ್ತೆ"),
+            (r"ಮುಳುಗುತ್ತದೆ", "ಮುಳುಗುತ್ತೆ"),
+            (r"ಮುಗಿಯುತ್ತದೆ", "ಮುಗಿಯುತ್ತೆ"),
+            (r"ನಿಲ್ಲುತ್ತದೆ", "ನಿಲ್ಲುತ್ತೆ"),
+            (r"ಕಾಣಿಸುತ್ತದೆ", "ಕಾಣಿಸುತ್ತೆ"),
+            (r"ಅನಿಸುತ್ತದೆ", "ಅನಿಸುತ್ತೆ"),
+            (r"ಪ್ರಾರಂಭವಾಗುತ್ತದೆ", "ಶುರುವಾಗುತ್ತೆ"),
+            (r"ಪ್ರಾರಂಭಿಸುತ್ತದೆ", "ಶುರು ಮಾಡುತ್ತೆ"),
+            # Conversational verb suffixes: plural/passive
+            (r"ಹೇಳಲಾಗುತ್ತದೆ", "ಹೇಳ್ತಾರೆ"),
+            (r"ಮಾಡಲಾಗುತ್ತದೆ", "ಮಾಡ್ತಾರೆ"),
+            (r"ಕರೆಯಲಾಗುತ್ತದೆ", "ಕರೀತಾರೆ"),
+            (r"ನೋಡಲಾಗುತ್ತದೆ", "ನೋಡ್ತಾರೆ"),
+            # Colloquial negatives
+            (r"ಸಾಧ್ಯವಿಲ್ಲ", "ಸಾಧ್ಯವೇ ಇಲ್ಲ"),
+            (r"ಆಗುವುದಿಲ್ಲ", "ಆಗಲ್ಲ"),
+            (r"ಬರುವುದಿಲ್ಲ", "ಬರಲ್ಲ"),
+            (r"ತಿಳಿಯುವುದಿಲ್ಲ", "ಗೊತ್ತಾಗಲ್ಲ"),
+            (r"ಇರುವುದಿಲ್ಲ", "ಇರಲ್ಲ"),
+            (r"ಕಾಣುವುದಿಲ್ಲ", "ಕಾಣಲ್ಲ"),
+            # Natural connectors
+            (r"ಏಕೆಂದರೆ", "ಯಾಕಂದ್ರೆ"),
+            (r"ಆದರೆ", "ಆದ್ರೆ"),
+            (r"ವಾಸ್ತವವಾಗಿ", "ನಿಜ ಹೇಳ್ಬೇಕಂದ್ರೆ"),
+        ]
+        for pattern, replacement in rules:
+            text = re.sub(pattern, replacement, text)
+
+    elif lang == "hindi":
+        rules = [
+            (r"क्या आपको ज्ञात है\??", "क्या आपको पता है?"),
+            (r"क्या आप जानते हैं\??", "क्या आपको पता है?"),
+            (r"कहा जाता है", "कहते हैं"),
+            (r"प्रारंभ होता है", "शुरू होता है"),
+            (r"प्रारंभ करता है", "शुरू करता है"),
+            (r"वास्तव में", "सच कहें तो"),
+        ]
+        for pattern, replacement in rules:
+            text = re.sub(pattern, replacement, text)
+
+    elif lang == "telugu":
+        rules = [
+            (r"మీకు తెలుసా\??", "మీకు తెలుసా?"),
+            (r"చెప్పబడుతుంది", "చెబుతారు"),
+            (r"ప్రారంభమవుతుంది", "మొదలవుతుంది"),
+            (r"వాస్తవానికి", "నిజం చెప్పాలంటే"),
+        ]
+        for pattern, replacement in rules:
+            text = re.sub(pattern, replacement, text)
+
+    elif lang == "tamil":
+        rules = [
+            (r"உங்களுக்குத் தெரியுமா\??", "உங்களுக்குத் தெரியுமா?"),
+            (r"கூறப்படுகிறது", "சொல்றாங்க"),
+            (r"தொடங்குகிறது", "ஆரம்பிக்குது"),
+            (r"உண்மையில்", "உண்மையைச் சொல்லப்போனா"),
+        ]
+        for pattern, replacement in rules:
+            text = re.sub(pattern, replacement, text)
+
+    return text
+
+
 class MultilingualTranslator:
     """Translates master scripts and YouTube metadata into target Indian languages."""
 
-    def __init__(self, preferred_provider: str = "mymemory"):
+    def __init__(self, preferred_provider: str = "gtx"):
         self.preferred_provider = preferred_provider
         self._cache: Dict[str, str] = {}
 
     def translate_text(self, text: str, target_lang: str) -> str:
         """Translate a single sentence or text fragment into the target language with robust fallback."""
+        import urllib.parse
+        import urllib.request
+
         cleaned_text = text.strip()
         if not cleaned_text:
             return ""
@@ -111,33 +204,54 @@ class MultilingualTranslator:
             return self._cache[cache_key]
 
         target_code = spec["code"]
+        target_iso = spec["iso"]
         translated = ""
 
-        # Tier 1: MyMemoryTranslator via deep-translator
+        # Tier 1: Google Translate direct gtx endpoint (Natural, fluent native syntax)
         try:
-            from deep_translator import MyMemoryTranslator
-            tr = MyMemoryTranslator(source="en-US", target=target_code)
-            res = tr.translate(cleaned_text)
-            if res and isinstance(res, str) and len(res.strip()) > 0:
-                translated = res.strip()
+            url = f"https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl={target_iso}&dt=t&q=" + urllib.parse.quote(cleaned_text)
+            req = urllib.request.Request(
+                url,
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+            )
+            with urllib.request.urlopen(req, timeout=6.0) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                if data and data[0]:
+                    res = "".join([segment[0] for segment in data[0] if segment and segment[0]])
+                    if res and len(res.strip()) > 0:
+                        translated = res.strip()
         except Exception as e:
-            logger.debug("MyMemory translation failed for '%s' (%s): %s", cleaned_text[:20], target_lang, e)
+            logger.debug("Google gtx translation failed for '%s' (%s): %s", cleaned_text[:20], target_lang, e)
 
-        # Tier 2: GoogleTranslator fallback
+        # Tier 2: MyMemoryTranslator fallback via deep-translator
+        if not translated:
+            try:
+                from deep_translator import MyMemoryTranslator
+                tr = MyMemoryTranslator(source="en-US", target=target_code)
+                res = tr.translate(cleaned_text)
+                if res and isinstance(res, str) and len(res.strip()) > 0:
+                    translated = res.strip()
+            except Exception as e:
+                logger.debug("MyMemory fallback failed for '%s' (%s): %s", cleaned_text[:20], target_lang, e)
+
+        # Tier 3: GoogleTranslator (deep-translator) fallback
         if not translated:
             try:
                 from deep_translator import GoogleTranslator
-                gtr = GoogleTranslator(source="en", target=spec["iso"])
+                gtr = GoogleTranslator(source="en", target=target_iso)
                 res = gtr.translate(cleaned_text)
                 if res and isinstance(res, str) and len(res.strip()) > 0:
                     translated = res.strip()
             except Exception as e:
                 logger.debug("GoogleTranslator fallback failed for '%s' (%s): %s", cleaned_text[:20], target_lang, e)
 
-        # Tier 3: If external translation fails, use cleaned original
+        # Tier 4: If external translation fails, use cleaned original
         if not translated:
             logger.warning("All translation tiers failed for '%s' -> %s. Retaining text.", cleaned_text[:30], target_lang)
             translated = cleaned_text
+
+        # Apply colloquial native conversational post-processing
+        translated = colloquialize_indic(translated, target_lang)
 
         self._cache[cache_key] = translated
         return translated
