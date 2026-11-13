@@ -77,5 +77,11 @@ class TopicScorer:
             if s > 0.0:  # Exclude duplicates / zero scores
                 scored.append((c, s))
 
+        # Fallback safeguard: if deduplication rejected everything, pick the candidates with base scores
+        if not scored and candidates:
+            logger.warning("All candidate topics filtered by deduplicator. Activating evergreen fallback.")
+            for c in candidates:
+                scored.append((c, 45.0))
+
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored
