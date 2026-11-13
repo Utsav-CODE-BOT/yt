@@ -163,61 +163,30 @@ class DailyOrchestrator:
             f"- **Total Runtime**: {elapsed_seconds / 60:.1f} minutes",
             f"- **Storage Cleaned**: {len(purged_files)} previous-day MP4 exports safely deleted",
             "",
-            "## 1. Daily Multilingual Production Overview (12 Shorts)",
+            "## 1. Daily Production Slots Overview",
             "",
-            "| Slot | Topic ID | Language | Visual Style | Status | Duration | Video URL | QC Score |",
+            "| Slot | Job ID | Niche | Visual Style | Status | Duration | Video URL | QC Score |",
             "|---|---|---|---|---|---|---|---|",
         ]
 
-        total_shorts_count = 0
         for res in job_results:
             details = res["details"]
             job = details.get("job", {})
-            prods = details.get("production", [])
-            qcs = details.get("quality_checks", [])
-            ups = details.get("uploads", [])
+            prod = details.get("production", [{}])[0] if details.get("production") else {}
+            qc = details.get("quality_checks", [{}])[0] if details.get("quality_checks") else {}
+            up = details.get("uploads", [{}])[0] if details.get("uploads") else {}
 
-            if ups:
-                for idx, up in enumerate(ups):
-                    total_shorts_count += 1
-                    # Match prod and qc for this upload
-                    matching_prod = prods[idx] if idx < len(prods) else (prods[0] if prods else {})
-                    matching_qc = qcs[idx] if idx < len(qcs) else (qcs[0] if qcs else {})
+            style = prod.get("style_name", "N/A")
+            status = job.get("status", "UNKNOWN")
+            duration = f"{prod.get('duration_seconds', 0.0):.1f}s" if prod else "N/A"
+            url = up.get("upload_url", "N/A")
+            qc_score = f"{qc.get('overall_score', 0.0):.1f}/100" if qc else "N/A"
 
-                    # Extract language from upload_id or voice_id
-                    up_id = up.get("upload_id", "")
-                    lang = "Default"
-                    for candidate_lang in ("kannada", "hindi", "telugu", "tamil"):
-                        if candidate_lang in up_id.lower() or candidate_lang in matching_prod.get("voice_id", "").lower():
-                            lang = candidate_lang.capitalize()
-                            break
-
-                    style = matching_prod.get("style_name", "N/A")
-                    status = up.get("upload_status", job.get("status", "UNKNOWN"))
-                    dur_val = matching_prod.get("duration_seconds", 0.0)
-                    duration = f"{dur_val:.1f}s" if dur_val else "N/A"
-                    url = up.get("upload_url", "N/A")
-                    qc_val = matching_qc.get("overall_score")
-                    qc_score = f"{qc_val:.1f}/100" if qc_val is not None else "N/A"
-
-                    lines.append(
-                        f"| {res['slot']} | `{res['job_id']}` | **{lang}** | `{style}` | `{status}` | {duration} | {url} | {qc_score} |"
-                    )
-            else:
-                prod = prods[0] if prods else {}
-                qc = qcs[0] if qcs else {}
-                style = prod.get("style_name", "N/A")
-                status = job.get("status", "UNKNOWN")
-                duration = f"{prod.get('duration_seconds', 0.0):.1f}s" if prod else "N/A"
-                url = "N/A"
-                qc_score = f"{qc.get('overall_score', 0.0):.1f}/100" if qc else "N/A"
-                lines.append(
-                    f"| {res['slot']} | `{res['job_id']}` | English | `{style}` | `{status}` | {duration} | {url} | {qc_score} |"
-                )
+            lines.append(
+                f"| {res['slot']} | `{res['job_id']}` | {res['niche']} | `{style}` | `{status}` | {duration} | {url} | {qc_score} |"
+            )
 
         lines.extend([
-            "",
-            f"**Total Videos Produced & Uploaded**: {total_shorts_count} Shorts",
             "",
             "## 2. Detailed Production Records",
             "",

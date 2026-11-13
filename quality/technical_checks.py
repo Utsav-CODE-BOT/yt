@@ -32,8 +32,8 @@ class TechnicalChecks:
 
     def __init__(
         self,
-        min_duration: float = 15.0,
-        max_duration: float = 59.5,
+        min_duration: float = 20.0,
+        max_duration: float = 32.0,
         target_width: int = 1080,
         target_height: int = 1920,
         ffmpeg_exe: str = "ffmpeg",

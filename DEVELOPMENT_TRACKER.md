@@ -28,7 +28,6 @@
 | **MILESTONE 8** | YouTube OAuth & verified upload integration | 🟢 COMPLETED | `publishing/youtube_auth.py`, `youtube_upload.py`, `upload_verifier.py`, `metadata_generator.py` with verified staging & live token support |
 | **MILESTONE 9** | Safe previous-day local MP4 cleanup manager | 🟢 COMPLETED | `storage/cleanup_manager.py` (database-backed, verified deletion manifest, protection for active day & source files) |
 | **MILESTONE 10** | End-to-end daily production run & daily audit report | 🟢 COMPLETED | Full 3-Shorts daily production run executed: 3/3 jobs COMPLETED, QC 100/100, verified uploads, `reports/2026-11-09-daily-report.md` |
-| **MILESTONE 11** | Multilingual 12-Shorts/Day Enhancement (Kannada, Hindi, Telugu, Tamil) | 🟢 COMPLETED | 4-language native pipeline, zero-cost Microsoft Neural Edge TTS Indic voices + gTTS fallback, Nirmala UI Unicode font engine, asset reuse architecture, localized YouTube metadata & upload automation |
 
 ---
 
@@ -94,18 +93,3 @@ The factory completed its first full autonomous daily batch with zero manual int
 5. **State Machine Recovery Idempotency**:
    - *Issue*: Recovering a failed job caused state transition exceptions (`Illegal transition: SCRIPT_GENERATION -> SCRIPT_GENERATION` or `FAILED -> TOPIC_SELECTION`).
    - *Hardening*: Added self-transition idempotency to `core/state_machine.py` and permitted recovery transitions from `FAILED` into any valid phase.
-6. **Indic Unicode Regex & Font Rendering**:
-   - *Issue*: Punctuation strip regex `replace(/[^a-z0-9']+/g, '')` stripped essential vowel marks (matras) and viramas in Indian scripts.
-   - *Hardening*: Replaced with Unicode mark category preserving regex `replace(/[^\p{L}\p{M}\p{N}']+/gu, '')` and injected Windows native `Nirmala UI` font stack into `index.html` and `sheet.html`.
-7. **Asset Reuse Optimization**:
-   - *Design*: Master 3D WebGL scenes, animations, and camera tracks are generated once per topic and reused across Kannada, Hindi, Telugu, and Tamil. Only localized voiceovers, subtitles, and metadata are regenerated.
-
-### 4. Multilingual 12-Shorts Daily Pipeline Verification
-- **4 Languages Supported**:
-  - **Kannada**: `kn-IN-GaganNeural` (Fallback: `gTTS` kn)
-  - **Hindi**: `hi-IN-MadhurNeural` (Fallback: `gTTS` hi)
-  - **Telugu**: `te-IN-MohanNeural` (Fallback: `gTTS` te)
-  - **Tamil**: `ta-IN-ValluvarNeural` (Fallback: `gTTS` ta)
-- **Deliverables Architecture**:
-  - Organized per-language bundles: `generated/<topic_id>/<language>/` containing `script.json`, `narration.wav`, `lines.json`, `words.json`, `metadata.json`, and final rendered `.mp4`.
-- **YouTube Targeting**: Automatic snippet tagging with `defaultLanguage` and `defaultAudioLanguage`, localized titles (<60 chars with `#Shorts`), and regional hashtags.

@@ -6,13 +6,10 @@ restart recovery and transactional SQLite updates.
 
 from __future__ import annotations
 
-import json
 import logging
-import shutil
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
-import yaml
+from typing import Any, Dict, Optional
 
 from content.hook_generator import HookGenerator
 from content.llm_client import OllamaClient
@@ -20,7 +17,6 @@ from content.originality_checker import OriginalityChecker
 from content.retention_analyzer import RetentionAnalyzer
 from content.script_validator import ScriptValidator
 from content.scriptwriter import Scriptwriter
-from content.translator import MultilingualTranslator
 from core.database import Database
 from core.event_logger import EventLogger
 from core.retry_manager import RetryManager
@@ -91,22 +87,6 @@ class PipelineCoordinator:
             exports_uploaded_dir=self.root / "workspace" / "exports" / "uploaded",
         )
         self.verifier = UploadVerifier(db, self.auth)
-
-        # Multilingual pipeline setup
-        self.translator = MultilingualTranslator()
-        self.multilingual_enabled = True
-        self.target_languages = ["kannada", "hindi", "telugu", "tamil"]
-
-        settings_path = self.root / "settings.yaml"
-        if settings_path.exists():
-            try:
-                with open(settings_path, "r", encoding="utf-8") as f:
-                    cfg = yaml.safe_load(f) or {}
-                ml_cfg = cfg.get("multilingual", {})
-                self.multilingual_enabled = ml_cfg.get("enabled", self.multilingual_enabled)
-                self.target_languages = ml_cfg.get("languages", self.target_languages)
-            except Exception as e:
-                logger.warning("Could not load multilingual configuration from settings.yaml: %s", e)
 
     def run_job(self, job_id: str, auto_publish: bool = True, privacy: str = "private") -> bool:
         """Advance job through pipeline stages until completion or failure."""
@@ -310,187 +290,6 @@ class PipelineCoordinator:
                     sm.transition_to(PipelineState.VIDEO_RENDERING, "Rendering Headless Chrome canvas")
                     self.db.update_job_status(job_id, PipelineState.VIDEO_RENDERING.value)
 
-            if self.multilingual_enabled and self.target_languages:
-                # =========================================================
-                # MULTILINGUAL PIPELINE (Asset Reuse: Visuals once, 4 Languages)
-                # =========================================================
-                sm.transition_to(PipelineState.VIDEO_RENDERING, "Rendering multilingual videos")
-                self.db.update_job_status(job_id, PipelineState.VIDEO_RENDERING.value)
-
-                # Read master script lines from project_dir / "script.json"
-                master_script_file = project_dir / "script.json"
-                master_script_json = json.loads(master_script_file.read_text(encoding="utf-8"))
-                master_lines = master_script_json.get("lines", [])
-
-                multilingual_successes = 0
-
-                for lang in self.target_languages:
-                    try:
-                        logger.info("--- Generating %s version for %s ---", lang.upper(), job_id)
-                        log_stage("MULTILINGUAL_TRANSLATION", f"Translating master script into {lang.capitalize()}...")
-
-                        # 1. Translate script
-                        localized_script = self.translator.translate_script(
-                            master_title=active_topic["title"],
-                            master_hook=active_script["chosen_hook"],
-                            master_lines=master_lines,
-                            target_lang=lang,
-                        )
-                        log_stage(
-                            "MULTILINGUAL_TRANSLATION",
-                            f"[{lang.upper()}] Script translated: {localized_script.word_count} words",
-                        )
-
-                        # Save translated script in database
-                        self.db.save_script(
-                            script_id=f"scr_{job_id}_{lang}",
-                            job_id=job_id,
-                            topic_id=active_topic["topic_id"],
-                            chosen_hook=localized_script.hook,
-                            hook_variants=[localized_script.hook],
-                            script_text=localized_script.full_text,
-                            estimated_duration=25.0,
-                            word_count=localized_script.word_count,
-                            pacing_wpm=130.0,
-                            validation_passed=1,
-                        )
-
-                        # 2. Voice generation & timestamp alignment
-                        log_stage("MULTILINGUAL_VOICE", f"[{lang.upper()}] Synthesizing neural Indic voiceover...")
-                        variant_info = self.project_builder.prepare_multilingual_variant(
-                            project_dir=project_dir,
-                            job_id=job_id,
-                            language=lang,
-                            localized_script=localized_script,
-                            speed=style_sel.speed,
-                        )
-                        log_stage(
-                            "MULTILINGUAL_VOICE",
-                            f"[{lang.upper()}] Audio synthesized ({variant_info['duration']:.1f}s)",
-                        )
-
-                        # 3. Video rendering (Captures canvas frames with localized captions & audio)
-                        output_filename = f"{job_id}_{lang}.mp4"
-                        log_stage("MULTILINGUAL_RENDER", f"[{lang.upper()}] Capturing 1080x1920 MP4 with native captions...")
-                        render_result = self.renderer.render(
-                            project_dir,
-                            job_id,
-                            output_filename=output_filename,
-                        )
-
-                        # Mirror to project language directory and generated/ directory
-                        lang_dir = project_dir / lang
-                        gen_lang_dir = self.root / "generated" / job_id / lang
-                        gen_lang_dir.mkdir(parents=True, exist_ok=True)
-
-                        shutil.copy2(render_result.mp4_path, lang_dir / output_filename)
-                        shutil.copy2(render_result.mp4_path, gen_lang_dir / output_filename)
-                        shutil.copy2(lang_dir / "script.json", gen_lang_dir / "script.json")
-                        shutil.copy2(lang_dir / "narration.wav", gen_lang_dir / "narration.wav")
-                        shutil.copy2(lang_dir / "lines.json", gen_lang_dir / "lines.json")
-                        shutil.copy2(lang_dir / "words.json", gen_lang_dir / "words.json")
-
-                        # Save production in database
-                        self.db.save_production(
-                            production_id=f"prod_{job_id}_{lang}",
-                            job_id=job_id,
-                            style_name=style_sel.style_name,
-                            voice_id=lang,
-                            project_dir=str(lang_dir),
-                            audio_path=str(lang_dir / "narration.wav"),
-                            words_json_path=str(lang_dir / "words.json"),
-                            shots_js_path=str(project_dir / "src" / "shots.js"),
-                            render_mp4_path=str(render_result.mp4_path),
-                            duration_seconds=render_result.duration_seconds,
-                            fps=render_result.fps,
-                            render_time_seconds=render_result.render_time_seconds,
-                        )
-
-                        # 4. Quality Control
-                        sheet_file = project_dir / "review" / "all.jpg"
-                        qc_result = self.quality_gate.evaluate_production(
-                            project_dir, render_result.mp4_path, sheet_file
-                        )
-                        self.db.save_quality_check(
-                            qc_id=f"qc_{job_id}_{lang}",
-                            job_id=job_id,
-                            overall_score=qc_result.overall_score,
-                            passed=qc_result.passed,
-                            resolution_check=qc_result.technical_passed,
-                            duration_check=qc_result.technical_passed,
-                            audio_levels_check=qc_result.audio_passed,
-                            caption_sync_check=qc_result.caption_passed,
-                            silence_gap_check=qc_result.audio_passed,
-                            qc_report=qc_result.report,
-                        )
-                        log_stage(
-                            "MULTILINGUAL_QC",
-                            f"[{lang.upper()}] QC score: {qc_result.overall_score:.1f}/100 ({'PASSED' if qc_result.passed else 'FLAGGED'})",
-                        )
-
-                        # 5. Localized Metadata Generation
-                        meta = self.translator.generate_localized_metadata(
-                            topic_title=active_topic["title"],
-                            niche=niche,
-                            hook=active_script["chosen_hook"],
-                            script_text=localized_script.full_text,
-                            target_lang=lang,
-                            source_url=active_topic.get("source_url", ""),
-                            source_title=active_topic.get("source_title", ""),
-                        )
-                        meta_dict = {
-                            "title": meta.title,
-                            "description": meta.description,
-                            "tags": meta.tags,
-                            "language": lang,
-                            "category_id": meta.category_id,
-                            "duration": render_result.duration_seconds,
-                            "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                        }
-                        (lang_dir / "metadata.json").write_text(json.dumps(meta_dict, indent=2, ensure_ascii=False), encoding="utf-8")
-                        (gen_lang_dir / "metadata.json").write_text(json.dumps(meta_dict, indent=2, ensure_ascii=False), encoding="utf-8")
-
-                        # 6. Upload to YouTube
-                        if auto_publish:
-                            log_stage("MULTILINGUAL_UPLOAD", f"[{lang.upper()}] Uploading to YouTube: '{meta.title}'")
-                            upload_res = self.uploader.upload(
-                                job_id,
-                                render_result.mp4_path,
-                                meta,
-                                privacy_status=privacy,
-                                language=lang,
-                            )
-                            receipt = self.verifier.verify_upload(job_id, upload_res.video_id)
-                            log_stage("MULTILINGUAL_UPLOAD", f"[{lang.upper()}] Upload verified! URL: {upload_res.upload_url}")
-
-                        multilingual_successes += 1
-                        logger.info("Successfully completed %s short for %s!", lang.upper(), job_id)
-
-                    except Exception as lang_exc:
-                        logger.error("Multilingual processing for language '%s' failed in job %s: %s", lang, job_id, lang_exc, exc_info=True)
-                        log_stage(
-                            "MULTILINGUAL_ERROR",
-                            f"[{lang.upper()}] Error: {lang_exc}. Continuing remaining languages...",
-                            lvl="ERROR",
-                            details={"error": str(lang_exc)},
-                        )
-
-                if multilingual_successes > 0:
-                    sm.transition_to(
-                        PipelineState.COMPLETED,
-                        f"Multilingual production complete ({multilingual_successes}/{len(self.target_languages)} languages succeeded)",
-                    )
-                    self.db.update_job_status(job_id, PipelineState.COMPLETED.value)
-                    log_stage(
-                        "COMPLETED",
-                        f"Slot {job['slot_number']} complete: {multilingual_successes}/{len(self.target_languages)} multilingual versions exported/uploaded!",
-                    )
-                    return True
-                else:
-                    raise RuntimeError(f"All multilingual language variants failed for job {job_id}")
-
-            else:
-                # Fallback / Single-video English workflow (backward compatibility)
                 log_stage("VIDEO_RENDERING", "Capturing 1080x1920 30fps MP4 frames...")
 
                 render_result = self.renderer.render(project_dir, job_id)
@@ -514,13 +313,16 @@ class PipelineCoordinator:
                     f"Render complete: {render_result.duration_seconds:.1f}s MP4 in {render_result.render_time_seconds:.1f}s",
                 )
 
-                # Retrieve active production
-                full_job = self.db.get_job_full_details(job_id)
-                active_prod = full_job.get("production", [])[0]
-                mp4_file = Path(active_prod["render_mp4_path"])
-                sheet_file = project_dir / "review" / "all.jpg"
+            # Retrieve active production
+            full_job = self.db.get_job_full_details(job_id)
+            active_prod = full_job.get("production", [])[0]
+            mp4_file = Path(active_prod["render_mp4_path"])
+            sheet_file = project_dir / "review" / "all.jpg"
 
-                # Stage 5: QUALITY_CONTROL & APPROVAL
+            # -------------------------------------------------------------
+            # Stage 5: QUALITY_CONTROL & APPROVAL
+            # -------------------------------------------------------------
+            if sm.current_state in (PipelineState.VIDEO_RENDERING, PipelineState.QUALITY_CONTROL):
                 sm.transition_to(PipelineState.QUALITY_CONTROL, "Auditing technical, audio, captions, and visual QC")
                 self.db.update_job_status(job_id, PipelineState.QUALITY_CONTROL.value)
 
@@ -546,32 +348,35 @@ class PipelineCoordinator:
                 self.db.update_job_status(job_id, PipelineState.APPROVAL.value)
                 log_stage("APPROVAL", f"Quality gate approved with score {qc_result.overall_score:.1f}/100")
 
-                # Stage 6: UPLOADING & VERIFICATION
-                if auto_publish:
-                    sm.transition_to(PipelineState.UPLOADING, "Uploading to YouTube")
-                    self.db.update_job_status(job_id, PipelineState.UPLOADING.value)
+            # -------------------------------------------------------------
+            # Stage 6: UPLOADING & VERIFICATION
+            # -------------------------------------------------------------
+            if auto_publish and sm.current_state in (PipelineState.APPROVAL, PipelineState.UPLOADING):
+                sm.transition_to(PipelineState.UPLOADING, "Uploading to YouTube")
+                self.db.update_job_status(job_id, PipelineState.UPLOADING.value)
 
-                    meta = self.metadata_gen.generate_metadata(
-                        topic_title=active_topic["title"],
-                        niche=niche,
-                        script_text=active_script["script_text"],
-                        hook=active_script["chosen_hook"],
-                        sources=[SourceCollector().create_source_record(active_topic["source_url"], active_topic["source_title"], "")],
-                    )
+                # Generate metadata
+                meta = self.metadata_gen.generate_metadata(
+                    topic_title=active_topic["title"],
+                    niche=niche,
+                    script_text=active_script["script_text"],
+                    hook=active_script["chosen_hook"],
+                    sources=[SourceCollector().create_source_record(active_topic["source_url"], active_topic["source_title"], "")],
+                )
 
-                    upload_res = self.uploader.upload(job_id, mp4_file, meta, privacy_status=privacy)
+                upload_res = self.uploader.upload(job_id, mp4_file, meta, privacy_status=privacy)
 
-                    sm.transition_to(PipelineState.UPLOAD_VERIFICATION, "Verifying live stream status")
-                    self.db.update_job_status(job_id, PipelineState.UPLOAD_VERIFICATION.value)
+                sm.transition_to(PipelineState.UPLOAD_VERIFICATION, "Verifying live stream status")
+                self.db.update_job_status(job_id, PipelineState.UPLOAD_VERIFICATION.value)
 
-                    receipt = self.verifier.verify_upload(job_id, upload_res.video_id)
-                    if not receipt.verified:
-                        raise RuntimeError(f"Upload verification failed: {receipt.notes}")
+                receipt = self.verifier.verify_upload(job_id, upload_res.video_id)
+                if not receipt.verified:
+                    raise RuntimeError(f"Upload verification failed: {receipt.notes}")
 
-                    sm.transition_to(PipelineState.CLEANUP, "Upload verified, ready for lifecycle completion")
-                    sm.transition_to(PipelineState.COMPLETED, "Daily slot production complete")
-                    self.db.update_job_status(job_id, PipelineState.COMPLETED.value)
-                    log_stage("COMPLETED", f"Slot {job['slot_number']} complete and verified on YouTube!")
+                sm.transition_to(PipelineState.CLEANUP, "Upload verified, ready for lifecycle completion")
+                sm.transition_to(PipelineState.COMPLETED, "Daily slot production complete")
+                self.db.update_job_status(job_id, PipelineState.COMPLETED.value)
+                log_stage("COMPLETED", f"Slot {job['slot_number']} complete and verified on YouTube!")
 
             return True
 

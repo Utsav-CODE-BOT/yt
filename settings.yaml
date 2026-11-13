@@ -2,39 +2,9 @@ application:
   name: Faceless Shorts OS
   timezone: Asia/Kolkata
   daily_target: 3
-  daily_multilingual_target: 12
   target_duration_seconds: 25
   minimum_duration_seconds: 22
   maximum_duration_seconds: 28
-
-multilingual:
-  enabled: true
-  languages:
-    - kannada
-    - hindi
-    - telugu
-    - tamil
-  tts_provider: edge-tts
-  tts_fallback: gtts
-  translation_provider: gtx
-  speed: 1.0
-  voices:
-    kannada: kn-IN-SapnaNeural
-    hindi: hi-IN-MadhurNeural
-    telugu: te-IN-MohanNeural
-    tamil: ta-IN-ValluvarNeural
-  alternate_voices:
-    kannada_male: kn-IN-GaganNeural
-    hindi_female: hi-IN-SwaraNeural
-    telugu_female: te-IN-ShrutiNeural
-    tamil_female: ta-IN-PallaviNeural
-  fonts:
-    primary: Nirmala UI
-    fallback: sans-serif
-  upload_scheduling:
-    batch_size: 12
-    retry_limit: 3
-    delay_between_uploads_seconds: 3
 
 automation:
   enabled: true

@@ -50,19 +50,11 @@ class CleanupManager:
         mp4_files = list(self.exports_uploaded_dir.glob("*.mp4"))
 
         for mp4_file in mp4_files:
-            file_stem = mp4_file.stem
-            # Check if this is a language-specific export (e.g. job_20261111_01_kannada)
-            base_job_id = file_stem
-            for lang in ("kannada", "hindi", "telugu", "tamil"):
-                if file_stem.endswith(f"_{lang}"):
-                    base_job_id = file_stem[:-len(f"_{lang}")]
-                    break
-
-            job = self.db.get_job(file_stem) or self.db.get_job(base_job_id)
-            job_id = base_job_id
+            job_id = mp4_file.stem
+            job = self.db.get_job(job_id)
 
             if not job:
-                logger.warning("File %s has no matching database job record (%s). Skipping for safety.", mp4_file.name, base_job_id)
+                logger.warning("File %s has no matching database job record. Skipping for safety.", mp4_file.name)
                 continue
 
             # Constraint 1: Must be older than current date

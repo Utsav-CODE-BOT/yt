@@ -23,13 +23,6 @@ workspace/exports/uploaded/*.mp4
 workspace/projects/*/renders/*.mp4
 workspace/projects/*/data/*.wav
 workspace/projects/*/review/*.jpg
-workspace/projects/*/*/*.mp4
-workspace/projects/*/*/*.wav
-generated/*/*/*.mp4
-generated/*/*/*.wav
-workspace/projects/test_*
-workspace/research/test_*
-generated/test_*
 
 # Operating System
 .DS_Store

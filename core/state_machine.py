@@ -45,7 +45,7 @@ VALID_TRANSITIONS: Dict[PipelineState, Set[PipelineState]] = {
     PipelineState.VOICE_GENERATION: {PipelineState.CAPTION_ALIGNMENT, PipelineState.SCRIPT_GENERATION, PipelineState.FAILED},
     PipelineState.CAPTION_ALIGNMENT: {PipelineState.SCENE_PLANNING, PipelineState.VOICE_GENERATION, PipelineState.FAILED},
     PipelineState.SCENE_PLANNING: {PipelineState.VIDEO_RENDERING, PipelineState.FAILED},
-    PipelineState.VIDEO_RENDERING: {PipelineState.QUALITY_CONTROL, PipelineState.SCENE_PLANNING, PipelineState.COMPLETED, PipelineState.FAILED},
+    PipelineState.VIDEO_RENDERING: {PipelineState.QUALITY_CONTROL, PipelineState.SCENE_PLANNING, PipelineState.FAILED},
     PipelineState.QUALITY_CONTROL: {PipelineState.APPROVAL, PipelineState.VIDEO_RENDERING, PipelineState.FAILED},
     PipelineState.APPROVAL: {PipelineState.UPLOADING, PipelineState.FAILED},
     PipelineState.UPLOADING: {PipelineState.UPLOAD_VERIFICATION, PipelineState.FAILED},

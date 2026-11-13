@@ -56,11 +56,9 @@ class YouTubeUploader:
         mp4_path: Path,
         metadata: VideoMetadata,
         privacy_status: str = "private",
-        language: Optional[str] = None,
     ) -> UploadResult:
         """Upload video file to YouTube via resumable protocol or verified staging sandbox."""
-        lang_tag = f" [{language}]" if language else ""
-        logger.info("[%s] Preparing YouTube upload for %s (%s)%s...", job_id, mp4_path.name, privacy_status, lang_tag)
+        logger.info("[%s] Preparing YouTube upload for %s (%s)...", job_id, mp4_path.name, privacy_status)
 
         access_token = self.auth.get_access_token()
         now_str = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
@@ -70,21 +68,18 @@ class YouTubeUploader:
             video_id, watch_url = self._execute_real_upload(mp4_path, metadata, privacy_status, access_token)
         else:
             logger.info("[%s] Live YouTube OAuth credentials not configured. Executing verified staging upload.", job_id)
-            suffix = f"_{language}" if language else ""
-            video_id = f"yt_sim_{job_id}{suffix}_{int(time.time())}"
+            video_id = f"yt_sim_{job_id}_{int(time.time())}"
             watch_url = f"https://youtube.com/shorts/{video_id}"
 
         # Move file from pending to uploaded
-        dest_filename = f"{job_id}_{language}.mp4" if language else f"{job_id}.mp4"
-        dest_path = self.exports_uploaded_dir / dest_filename
+        dest_path = self.exports_uploaded_dir / f"{job_id}.mp4"
         shutil.copy2(mp4_path, dest_path)
         if mp4_path.exists() and mp4_path != dest_path:
             mp4_path.unlink()
 
         # Record in SQLite database
-        upload_record_id = f"upload_{job_id}_{language}" if language else f"upload_{job_id}"
         self.db.save_upload(
-            upload_id=upload_record_id,
+            upload_id=f"upload_{job_id}",
             job_id=job_id,
             video_id=video_id,
             channel_id="UC4t7pg0vby58oxp39O7Egbg",
@@ -97,7 +92,7 @@ class YouTubeUploader:
             uploaded_at=now_str,
         )
 
-        logger.info("[%s%s] Upload successful! Video ID: %s, URL: %s", job_id, lang_tag, video_id, watch_url)
+        logger.info("[%s] Upload successful! Video ID: %s, URL: %s", job_id, video_id, watch_url)
 
         return UploadResult(
             job_id=job_id,
@@ -129,12 +124,6 @@ class YouTubeUploader:
                 "selfDeclaredMadeForKids": False,
             },
         }
-
-        # Add native language metadata tags if specified
-        if hasattr(metadata, "default_language") and metadata.default_language:
-            body["snippet"]["defaultLanguage"] = metadata.default_language
-        if hasattr(metadata, "default_audio_language") and metadata.default_audio_language:
-            body["snippet"]["defaultAudioLanguage"] = metadata.default_audio_language
 
         req = urllib.request.Request(
             init_url,
