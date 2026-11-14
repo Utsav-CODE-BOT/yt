@@ -132,7 +132,9 @@ class PipelineCoordinator:
                 candidates = self.trend_engine.discover_candidates_for_niche(niche, target_count=15)
                 ranked = self.scorer.rank_candidates(candidates)
                 if not ranked:
-                    raise RuntimeError(f"No viable topic candidates found for niche '{niche}'")
+                    logger.warning("No topic candidates ranked for niche '%s'. Generating emergency fallback candidate.", niche)
+                    emergency_candidate = self.trend_engine.generate_emergency_candidate(niche)
+                    ranked = [(emergency_candidate, 75.0)]
 
                 chosen_candidate, candidate_score = ranked[0]
 

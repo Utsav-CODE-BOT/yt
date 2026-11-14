@@ -77,5 +77,19 @@ class TopicScorer:
             if s > 0.0:  # Exclude duplicates / zero scores
                 scored.append((c, s))
 
+        # Fallback safeguard: if all candidates were filtered by deduplication but candidates list is non-empty,
+        # award base score so the pipeline never halts abruptly on 0 candidates
+        if not scored and candidates:
+            logger.warning(
+                "All %d candidates were filtered by deduplication; activating resilient fallback scoring.",
+                len(candidates),
+            )
+            for c in candidates:
+                text_lower = f"{c.title} {c.summary}".lower()
+                curiosity_hits = sum(1 for pat in HIGH_CURIOSITY_SIGNALS if re.search(pat, text_lower))
+                visual_hits = sum(1 for pat in VISUAL_POTENTIAL_WORDS if re.search(pat, text_lower))
+                fallback_score = 50.0 + min(20.0, curiosity_hits * 6.0) + min(15.0, visual_hits * 5.0)
+                scored.append((c, fallback_score))
+
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored

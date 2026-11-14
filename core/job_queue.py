@@ -40,10 +40,12 @@ class JobQueue:
         If force=True, creates a fresh additional batch of 3 slots for today.
         """
         target_date = date_str or self.get_current_date_str()
-        existing_jobs = self.db.get_jobs_for_date(target_date)
+        expected_prefix = f"job_{target_date.replace('-', '')}"
+        all_existing = self.db.get_jobs_for_date(target_date)
+        existing_jobs = [j for j in all_existing if j["job_id"].startswith(expected_prefix)]
 
         if not force and len(existing_jobs) >= 3:
-            logger.info("Daily slots for %s already exist (%d jobs found).", target_date, len(existing_jobs))
+            logger.info("Daily slots for %s already exist (%d production jobs found).", target_date, len(existing_jobs))
             return existing_jobs
 
         default_slots = [
@@ -63,7 +65,7 @@ class JobQueue:
         for slot_info in default_slots:
             slot_num = slot_info["slot"]
             if not force:
-                found = next((j for j in existing_jobs if j["slot_number"] == slot_num), None)
+                found = next((j for j in existing_jobs if j["slot_number"] == slot_num and j["job_id"].startswith(expected_prefix)), None)
                 if found:
                     created_jobs.append(found)
                     continue
@@ -85,13 +87,12 @@ class JobQueue:
     def get_pending_jobs(self, date_str: Optional[str] = None) -> List[Dict[str, Any]]:
         """Return incomplete jobs for the current day or recovered incomplete jobs."""
         target_date = date_str or self.get_current_date_str()
-        # First check incomplete jobs across system
-        incompletes = self.db.get_incomplete_jobs()
-        if incompletes:
-            return incompletes
+        # Daily slots for target date takes precedence
+        daily_jobs = self.initialize_daily_slots(target_date)
+        pending_daily = [j for j in daily_jobs if j["status"] not in ("COMPLETED", "FAILED")]
+        if pending_daily:
+            return pending_daily
 
-        # Otherwise check if today's jobs are initialized
-        return [
-            j for j in self.initialize_daily_slots(target_date)
-            if j["status"] not in ("COMPLETED", "FAILED")
-        ]
+        # Otherwise check legitimate production incomplete jobs across system
+        incompletes = [j for j in self.db.get_incomplete_jobs() if j["job_id"].startswith("job_")]
+        return incompletes
