@@ -13,7 +13,9 @@ automation:
   retry_limit: 3
 
 content:
-  multi_niche: true
+  niche: history
+  niche_focus: history_only
+  multi_niche: false
   originality_check: true
   factual_verification: true
   minimum_topic_candidates: 15

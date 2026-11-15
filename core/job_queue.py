@@ -49,9 +49,9 @@ class JobQueue:
             return existing_jobs
 
         default_slots = [
-            {"slot": 1, "niche": "Science and human body", "pillar": "Curiosity & Human Potential"},
-            {"slot": 2, "niche": "Psychology and human behaviour", "pillar": "Curiosity & Human Potential"},
-            {"slot": 3, "niche": "Extraordinary real-world stories", "pillar": "True Stories & Historical Drama"},
+            {"slot": 1, "niche": "Ancient history and civilizations", "pillar": "Ancient Civilizations & Archaeology"},
+            {"slot": 2, "niche": "History and historical mysteries", "pillar": "Lost Civilizations & Enigmas"},
+            {"slot": 3, "niche": "Historical turning points and extraordinary events", "pillar": "Turning Points & True Drama"},
         ]
 
         if slots and len(slots) == 3:

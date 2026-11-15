@@ -22,10 +22,12 @@ AVAILABLE_STYLES = [
 ]
 
 STYLE_NICHE_AFFINITIES: Dict[str, List[str]] = {
+    "Ancient history and civilizations": ["paper-atlas", "deep-dive", "night-file"],
+    "History and historical mysteries": ["paper-atlas", "night-file", "tall-tale"],
+    "Historical turning points and extraordinary events": ["tall-tale", "paper-atlas", "night-file"],
     "Science and human body": ["inside-out", "deep-dive"],
     "Psychology and human behaviour": ["stick-story", "tall-tale"],
     "Interesting facts": ["deep-dive", "paper-atlas", "stick-story"],
-    "History and historical mysteries": ["paper-atlas", "night-file", "tall-tale"],
     "Technology and artificial intelligence": ["deep-dive", "inside-out"],
     "Space and astronomy": ["night-file", "deep-dive"],
     "Nature and animals": ["deep-dive", "stick-story"],

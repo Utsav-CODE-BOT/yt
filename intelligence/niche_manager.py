@@ -26,6 +26,33 @@ class NicheDefinition:
 
 
 NICHE_REGISTRY: Dict[str, NicheDefinition] = {
+    "history_ancient": NicheDefinition(
+        id="history_ancient",
+        name="Ancient history and civilizations",
+        pillar="Ancient Civilizations & Archaeology",
+        description="Ancient engineering marvels, Rome, Egypt, forgotten empires, and ancient archaeological discoveries.",
+        preferred_styles=["paper-atlas", "deep-dive"],
+        curiosity_keywords=["ancient", "rome", "egypt", "pyramid", "greece", "archaeology", "bronze age", "empire", "emperor"],
+        enabled=True,
+    ),
+    "history_mysteries": NicheDefinition(
+        id="history_mysteries",
+        name="History and historical mysteries",
+        pillar="Lost Civilizations & Enigmas",
+        description="Untold historical enigmas, lost legions, deciphered manuscripts, and mysterious historical anomalies.",
+        preferred_styles=["paper-atlas", "night-file"],
+        curiosity_keywords=["ancient", "empire", "archaeology", "lost", "king", "war", "treasure", "mystery", "voynich"],
+        enabled=True,
+    ),
+    "history_turning_points": NicheDefinition(
+        id="history_turning_points",
+        name="Historical turning points and extraordinary events",
+        pillar="Turning Points & True Drama",
+        description="Unbelievable historical deceptions, bizarre battles, wartime hoaxes, and moments that altered history.",
+        preferred_styles=["tall-tale", "paper-atlas", "night-file"],
+        curiosity_keywords=["battle", "napoleon", "war", "deception", "heist", "treaty", "revolution", "bizarre", "soldier"],
+        enabled=True,
+    ),
     "science_body": NicheDefinition(
         id="science_body",
         name="Science and human body",
@@ -33,6 +60,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Fascinating human biology, physiological anomalies, and biological mechanisms.",
         preferred_styles=["inside-out", "deep-dive"],
         curiosity_keywords=["body", "brain", "cells", "organs", "heart", "dna", "biology"],
+        enabled=False,
     ),
     "psychology": NicheDefinition(
         id="psychology",
@@ -41,6 +69,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Cognitive biases, psychological phenomena, social experiments, and behavioral mysteries.",
         preferred_styles=["stick-story", "tall-tale"],
         curiosity_keywords=["psychology", "bias", "brain", "memory", "illusion", "behavior", "habit"],
+        enabled=False,
     ),
     "interesting_facts": NicheDefinition(
         id="interesting_facts",
@@ -49,14 +78,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Mind-bending, counter-intuitive facts about everyday things and the natural world.",
         preferred_styles=["deep-dive", "paper-atlas", "stick-story"],
         curiosity_keywords=["secret", "bizarre", "hidden", "discovery", "weird", "unbelievable"],
-    ),
-    "history_mysteries": NicheDefinition(
-        id="history_mysteries",
-        name="History and historical mysteries",
-        pillar="True Stories & Historical Drama",
-        description="Untold historical events, forgotten discoveries, and dramatic turning points.",
-        preferred_styles=["paper-atlas", "night-file", "tall-tale"],
-        curiosity_keywords=["ancient", "empire", "archaeology", "lost", "king", "war", "treasure"],
+        enabled=False,
     ),
     "technology_ai": NicheDefinition(
         id="technology_ai",
@@ -65,6 +87,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Cutting-edge computing, robotics, cybersecurity, and technological shifts.",
         preferred_styles=["deep-dive", "inside-out"],
         curiosity_keywords=["robot", "ai", "quantum", "chip", "algorithm", "supercomputer", "cyber"],
+        enabled=False,
     ),
     "space_astronomy": NicheDefinition(
         id="space_astronomy",
@@ -73,6 +96,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Extreme cosmic phenomena, black holes, rogue planets, and astrophysics.",
         preferred_styles=["night-file", "deep-dive"],
         curiosity_keywords=["black hole", "galaxy", "nasa", "planet", "telescope", "star", "nebula"],
+        enabled=False,
     ),
     "nature_animals": NicheDefinition(
         id="nature_animals",
@@ -81,6 +105,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Extreme evolutionary adaptations, predator tactics, and deep-sea creatures.",
         preferred_styles=["deep-dive", "stick-story"],
         curiosity_keywords=["predator", "ocean", "evolution", "creature", "venom", "extinct"],
+        enabled=False,
     ),
     "survival_practical": NicheDefinition(
         id="survival_practical",
@@ -89,6 +114,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Scientific survival physics, real disaster escapes, and critical practical laws.",
         preferred_styles=["stick-story", "night-file"],
         curiosity_keywords=["survival", "rescue", "escape", "avalanche", "hypothermia", "island"],
+        enabled=False,
     ),
     "fitness_physiology": NicheDefinition(
         id="fitness_physiology",
@@ -97,6 +123,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Muscle mechanics, endurance science, sleep architecture, and metabolism.",
         preferred_styles=["inside-out", "deep-dive"],
         curiosity_keywords=["muscle", "strength", "endurance", "sleep", "recovery", "metabolism"],
+        enabled=False,
     ),
     "real_stories": NicheDefinition(
         id="real_stories",
@@ -105,6 +132,7 @@ NICHE_REGISTRY: Dict[str, NicheDefinition] = {
         description="Unbelievable true events, audacious gambles, heists, and extraordinary human feats.",
         preferred_styles=["tall-tale", "paper-atlas", "night-file"],
         curiosity_keywords=["heist", "gamble", "millionaire", "soldier", "daring", "escape", "bank"],
+        enabled=False,
     ),
 }
 

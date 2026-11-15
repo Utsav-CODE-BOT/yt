@@ -147,7 +147,100 @@ EVERGREEN_CURIOSITY_REPO: Dict[str, List[Dict[str, Any]]] = {
             "seed_facts": ["Eye lens radiocarbon dating confirmed 392 year lifespan", "Heart beats only once every 12 seconds", "Reaches reproductive maturity at 150 years old"]
         },
     ],
+    "Ancient history and civilizations": [
+        {
+            "title": "Why Roman Concrete Actually Heals Itself",
+            "summary": "MIT researchers discovered ancient Roman concrete contained quicklime clasts that dissolve and recrystallize when seawater enters cracks, automatically repairing harbor walls for 2,000 years.",
+            "source_url": "https://news.mit.edu/2023/roman-concrete-durability-lime-clasts-0106",
+            "source_title": "MIT News / Science Advances",
+            "seed_facts": ["Hot mixing creates reactive calcium-rich inclusions", "Seawater dissolves quicklime into calcium carbonate", "Self-healed cracks prevent rebar-free collapse for millennia"]
+        },
+        {
+            "title": "The Catastrophic Bronze Age Collapse",
+            "summary": "Around 1177 BC, eight flourishing civilizations across the Mediterranean collapsed within fifty years due to megadroughts, earthquake storms, and mysterious Sea Peoples.",
+            "source_url": "https://www.smithsonianmag.com/history/what-caused-bronze-age-collapse-180980486/",
+            "source_title": "Smithsonian Magazine / Princeton Archaeological Press",
+            "seed_facts": ["Mycenae, Hittite Empire, and Ugarit destroyed almost simultaneously", "Centuries of cultural dark ages followed", "Pollen cores prove severe 150-year megadrought"]
+        },
+        {
+            "title": "How the Great Pyramid Stays at Exactly 20 Degrees",
+            "summary": "The 2.3 million limestone blocks of the Great Pyramid of Giza provide such massive thermal inertia that its interior chambers remain locked at exactly 20 degrees Celsius year-round.",
+            "source_url": "https://www.britannica.com/topic/Pyramids-of-Giza",
+            "source_title": "Encyclopaedia Britannica Architectural Archives",
+            "seed_facts": ["Mass of over 5.75 million tons", "Acts as giant passive thermal heat sink", "Internal temperature never fluctuates despite 45°C desert summers"]
+        },
+        {
+            "title": "The Lost Underground City of Derinkuyu",
+            "summary": "Carved 280 feet into volcanic rock in Cappadocia, Derinkuyu could shelter 20,000 people underground with 15,000 ventilation shafts, wineries, and rolling stone doors.",
+            "source_url": "https://www.bbc.com/travel/article/20220810-derinkuyu-the-underground-city-of-cappadocia",
+            "source_title": "BBC Travel / Turkish Department of Antiquities",
+            "seed_facts": ["Extends 18 levels beneath the surface", "Massive 1,000-pound stone disc doors lockable only from inside", "Entire ecosystem shielded citizens from invading armies"]
+        },
+        {
+            "title": "The Poison King Who Built Immunity to Death",
+            "summary": "King Mithridates VI of Pontus ingested microscopic daily doses of deadly poisons to build biological tolerance, becoming completely immune to assassination.",
+            "source_url": "https://www.worldhistory.org/Mithridates_VI/",
+            "source_title": "World History Encyclopedia",
+            "seed_facts": ["Formulated universal antidote known as Mithridatium", "Could not poison himself when captured and had to order a soldier to use a sword", "Gave rise to the medical term mithridatism"]
+        },
+        {
+            "title": "The Damascus Steel Nanotube Mystery",
+            "summary": "Ancient Syrian blacksmiths forged Damascus steel swords with carbon nanotubes and cementite nanowires, producing blades so sharp they could slice falling silk handkerchiefs.",
+            "source_url": "https://www.nature.com/articles/444286a",
+            "source_title": "Nature Materials Science Analysis",
+            "seed_facts": ["High carbon wootz steel from ancient India", "Thermal cycling created aligned carbon nanotube matrices", "The exact forging technique was lost in the 18th century"]
+        },
+        {
+            "title": "The Roman Emperor Who Declared War on Poseidon",
+            "summary": "In 40 AD, Roman Emperor Caligula marched his legions to the English Channel, ordered them to attack the ocean with spears, and collected seashells as spoils of war.",
+            "source_url": "https://www.historyskills.com/classroom/ancient-history/caligula-and-neptune/",
+            "source_title": "Suetonius Historical Records / Roman Annals",
+            "seed_facts": ["Legions drew up battle formations on the beach", "Ordered soldiers to fill helmets with seashells called 'plunder of the ocean'", "Declared a triumph over Neptune god of the sea"]
+        },
+    ],
     "History and historical mysteries": [
+        {
+            "title": "The Voynich Manuscript Nobody Can Decipher",
+            "summary": "Carbon-dated to the early 1400s, the 240-page Voynich manuscript is written in an unknown alphabet and cipher that has baffled the world's greatest cryptographers.",
+            "source_url": "https://beinecke.library.yale.edu/collections/highlights/voynich-manuscript",
+            "source_title": "Yale University Beinecke Rare Book Library",
+            "seed_facts": ["Contains drawings of nonexistent cosmological constellations and flora", "Statistical word distribution follows Zipf's law of genuine natural language", "Neither Alan Turing nor modern AI has cracked the code"]
+        },
+        {
+            "title": "The Lost Ninth Legion That Vanished in the Mists",
+            "summary": "Around 120 AD, the battle-hardened Roman Ninth Legion marched 5,000 soldiers into the Caledonian wilderness of Scotland and completely disappeared from historical records.",
+            "source_url": "https://www.bbc.com/news/uk-scotland-highlands-islands-56165518",
+            "source_title": "BBC History Archaeology Review",
+            "seed_facts": ["Legio IX Hispana was one of Rome's most feared divisions", "Vanished past the northern frontier without a single survivor", "Prompted Emperor Hadrian to construct Hadrian's Wall across Britain"]
+        },
+        {
+            "title": "The Ghost Ship Mary Celeste Found Sailing Empty",
+            "summary": "In December 1872, the brigantine Mary Celeste was found floating in the Atlantic under full sail with untouched cargo and personal belongings, but not a single soul aboard.",
+            "source_url": "https://www.smithsonianmag.com/history/abandoned-ship-the-mary-celeste-174488175/",
+            "source_title": "Smithsonian Magazine Maritime Archives",
+            "seed_facts": ["Lifeboat was missing but six months of food remained", "Cargo of 1,700 barrels of industrial alcohol intact", "No signs of violence, piracy, or storm damage"]
+        },
+        {
+            "title": "The Baffling Antikythera Analog Computer",
+            "summary": "Divers off a Greek island retrieved a 2,100-year-old bronze geared mechanism that tracked planetary orbits and predicted solar eclipses centuries ahead of its time.",
+            "source_url": "https://www.nature.com/articles/nature05357",
+            "source_title": "Nature Archaeological Analysis",
+            "seed_facts": ["Contains over 30 precision differential gears", "Mechanical complexity not matched until 14th-century cathedral clocks", "Predicted Saros eclipse cycles with mechanical dials"]
+        },
+        {
+            "title": "The Vanished Roanoke Colony and the Word Croatoan",
+            "summary": "In 1590, governor John White returned to England's first New World colony to find all 115 men, women, and children gone, leaving only the word CROATOAN carved into a tree.",
+            "source_url": "https://www.nationalgeographic.com/history/article/vanished-colony-roanoke-clues",
+            "source_title": "National Geographic Historical Archaeology",
+            "seed_facts": ["No graves, skeletons, or signs of struggle found", "Houses dismantled rather than burned down", "Evidence suggests settlers assimilated into local indigenous tribes"]
+        },
+        {
+            "title": "The Secret Underground Tomb of Genghis Khan",
+            "summary": "When Genghis Khan died in 1227, his funeral escort slaughtered every witness they met, diverted a river over the grave, and had 800 horsemen trample the earth to erase all trace.",
+            "source_url": "https://www.nationalgeographic.com/history/article/valley-of-the-khans-genghis-khan-tomb",
+            "source_title": "National Geographic Mongolian Expeditions",
+            "seed_facts": ["Escort soldiers executed upon returning to camp to keep the secret", "Buried near sacred mountain Burkhan Khaldun", "Satellite radar scans have yet to find the burial chamber"]
+        },
         {
             "title": "The Dancing Plague of 1518",
             "summary": "In Strasbourg, hundreds of people danced uncontrollably in the streets for weeks until they collapsed from exhaustion and heart failure.",
@@ -155,26 +248,56 @@ EVERGREEN_CURIOSITY_REPO: Dict[str, List[Dict[str, Any]]] = {
             "source_title": "BBC Culture / Medical History Records",
             "seed_facts": ["Started with one woman named Frau Troffea", "Over 400 people joined over a month", "Attributed to mass psychogenic hysteria or ergot poisoning"]
         },
+    ],
+    "Historical turning points and extraordinary events": [
+        {
+            "title": "Operation Mincemeat: The Corpse That Fooled Hitler",
+            "summary": "British intelligence dressed a deceased homeless man as a royal marine officer carrying fake invasion plans, convincing German command to defend Greece instead of Sicily.",
+            "source_url": "https://www.nationalarchives.gov.uk/education/resources/operation-mincemeat/",
+            "source_title": "UK National Archives Intelligence Records",
+            "seed_facts": ["Body of Glyndwr Michael released off coast of Spain", "Hitler redeployed Panzer divisions from Italy to Greece", "Allied invasion of Sicily succeeded with minimal casualties"]
+        },
+        {
+            "title": "The Man Who Prevented World War Three by Doing Nothing",
+            "summary": "In 1983, Soviet officer Stanislav Petrov noticed early-warning radar detecting five incoming US nuclear missiles, correctly deduced a computer glitch, and refused to launch retaliation.",
+            "source_url": "https://www.bbc.com/news/world-europe-24280831",
+            "source_title": "BBC News International Archives",
+            "seed_facts": ["Oko satellite false alarm caused by sun reflecting off high-altitude clouds", "Protocol required immediate massive nuclear counter-strike", "His unilateral refusal averted global nuclear annihilation"]
+        },
+        {
+            "title": "The WWII Ghost Army of Inflatable Tanks",
+            "summary": "The U.S. 23rd Headquarters Special Troops used 1,000 inflatable rubber tanks and giant sound amplifiers to trick German reconnaissance into misdirecting their frontline divisions.",
+            "source_url": "https://www.defense.gov/News/Feature-Stories/story/Article/3715694/",
+            "source_title": "U.S. Department of Defense Historical Archives",
+            "seed_facts": ["Inflatable tanks made of heavy rubber and air pumps", "Sound vans broadcasted sounds of tank divisions from 15 miles away", "Credited with saving tens of thousands of Allied lives"]
+        },
+        {
+            "title": "The 1814 London Beer Flood Disaster",
+            "summary": "In October 1814, a 22-foot high wooden fermentation vat ruptured in London, unleashing a 15-foot tidal wave of 323,000 gallons of fermented porter down city streets.",
+            "source_url": "https://www.history.com/news/london-beer-flood",
+            "source_title": "History Channel Archives",
+            "seed_facts": ["Iron hoop on Meux and Company brewery vat snapped", "Wave destroyed two brick houses and breached tavern walls", "Court ruled disaster was an unavoidable Act of God"]
+        },
+        {
+            "title": "The 335-Year War Without a Single Shot Fired",
+            "summary": "A state of war existed between the Netherlands and the Isles of Scilly from 1651 to 1986 without a single shot fired or casualty before a peace treaty was signed 335 years later.",
+            "source_url": "https://www.historic-uk.com/HistoryUK/HistoryofBritain/The-335-Year-War/",
+            "source_title": "Historic UK Annals",
+            "seed_facts": ["Declared during English Civil War by Dutch Admiral Maarten Tromp", "Dutch fleet withdrew and forgot to officially sign a peace treaty", "Treaty finally ratified in 1986 by Dutch Ambassador"]
+        },
+        {
+            "title": "The Stolen Mona Lisa and the World's Greatest Manhunt",
+            "summary": "In 1911, a museum handyman simply walked out of the Louvre with the Mona Lisa hidden under his coat, making it the most famous painting in history.",
+            "source_url": "https://www.louvre.fr/en/explore/the-palace/history-of-the-mona-lisa",
+            "source_title": "Musée du Louvre Historical Archives",
+            "seed_facts": ["Vincenzo Peruggia hid overnight in a broom closet", "Louvre didn't notice it was missing for 24 hours", "Recovered 2 years later in Florence"]
+        },
         {
             "title": "The Real Reason Napoleon's Army Lost Their Buttons",
             "summary": "In the freezing Russian winter of 1812, tin buttons on French soldiers' coats disintegrated due to the tin pest chemical transformation.",
             "source_url": "https://www.rsc.org/periodic-table/element/50/tin",
             "source_title": "Royal Society of Chemistry",
             "seed_facts": ["White tin changes to brittle gray tin below 13.2°C", "Coats fell open in -30°C blizzard", "Accelerated severe hypothermia"]
-        },
-        {
-            "title": "The Ancient Antikythera Mechanism",
-            "summary": "In 1901, divers recovered a 2,100-year-old bronze geared mechanism off Greece that accurately calculated planetary motions and eclipse cycles.",
-            "source_url": "https://www.nature.com/articles/nature05357",
-            "source_title": "Nature Archaeological Analysis",
-            "seed_facts": ["Contains over 30 intricate bronze gears", "Predicted eclipses decades in advance", "Considered world's first mechanical analog computer"]
-        },
-        {
-            "title": "The WWII Ghost Army of Inflatable Decoys",
-            "summary": "The U.S. 23rd Headquarters Special Troops used 1,000 dummy inflatable rubber tanks and 500-pound sound speakers to fool German reconnaissance in France.",
-            "source_url": "https://www.defense.gov/News/Feature-Stories/story/Article/3715694/",
-            "source_title": "U.S. Department of Defense Historical Archives",
-            "seed_facts": ["Inflatable tanks made of heavy rubber and air pumps", "Sound vans broadcasted sounds of tank divisions from 15 miles away", "Credited with saving tens of thousands of Allied lives"]
         },
     ],
     "Technology and artificial intelligence": [
@@ -401,7 +524,7 @@ class TrendDiscoveryEngine:
         cur_day = day or now.day
 
         # 1. Try web sources if applicable
-        if "History" in niche_name:
+        if "history" in niche_name.lower():
             wiki_items = self.fetch_wikipedia_on_this_day(cur_month, cur_day)
             candidates.extend(wiki_items)
 
@@ -419,10 +542,10 @@ class TrendDiscoveryEngine:
                 )
             )
 
-        # 3. If below target count, cross-pollinate with adjacent niche items or variations
+        # 3. If below target count, cross-pollinate with adjacent history items
         if len(candidates) < target_count:
             for n_key, items in EVERGREEN_CURIOSITY_REPO.items():
-                if n_key != niche_name and len(candidates) < target_count:
+                if "history" in n_key.lower() and n_key != niche_name and len(candidates) < target_count:
                     for itm in items:
                         candidates.append(
                             TopicCandidate(
