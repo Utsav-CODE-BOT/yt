@@ -48,10 +48,10 @@ VOICE_MAP: Dict[str, str] = {
 class StyleSelection:
     style_name: str
     voice_id: str
-    speed: float = 1.05
-    lead: float = 0.45
-    outro: float = 0.90
-    gap: float = 0.32
+    speed: float = 1.14
+    lead: float = 0.20
+    outro: float = 0.45
+    gap: float = 0.16
 
 
 class StyleSelector:
@@ -96,8 +96,8 @@ class StyleSelector:
         return StyleSelection(
             style_name=chosen_style,
             voice_id=voice_id,
-            speed=1.05,
-            lead=0.45,
-            outro=0.90,
-            gap=0.32,
+            speed=1.14,
+            lead=0.20,
+            outro=0.45,
+            gap=0.16,
         )

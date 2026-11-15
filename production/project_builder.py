@@ -93,7 +93,7 @@ class ProjectBuilder:
         hook: str,
         voice_id: str = "am_michael",
         title: str = "Daily Short",
-        speed: float = 1.10,
+        speed: float = 1.14,
     ) -> Path:
         """Create a complete runnable project directory."""
         template_dir = self.skills_root / "styles" / style_name / "example"
@@ -123,9 +123,9 @@ class ProjectBuilder:
             "title": title,
             "voice": voice_id,
             "speed": speed,
-            "lead": 0.30,
-            "outro": 0.60,
-            "gap": 0.20,
+            "lead": 0.20,
+            "outro": 0.45,
+            "gap": 0.15,
             "lines": formatted_lines,
         }
 

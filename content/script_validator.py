@@ -39,7 +39,7 @@ class ScriptValidationResult:
 class ScriptValidator:
     """Enforces rigorous editorial and technical constraints on short scripts."""
 
-    def __init__(self, min_words: int = 40, max_words: int = 70, min_duration: float = 20.0, max_duration: float = 28.5):
+    def __init__(self, min_words: int = 45, max_words: int = 80, min_duration: float = 20.0, max_duration: float = 33.0):
         self.min_words = min_words
         self.max_words = max_words
         self.min_duration = min_duration

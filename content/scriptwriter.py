@@ -28,7 +28,7 @@ class GeneratedScript:
 class Scriptwriter:
     """Produces timing-disciplined spoken scripts for vertical short-form video."""
 
-    def __init__(self, llm: OllamaClient, words_per_minute: float = 140.0):
+    def __init__(self, llm: OllamaClient, words_per_minute: float = 150.0):
         self.llm = llm
         self.wpm = words_per_minute
 
@@ -118,16 +118,33 @@ class Scriptwriter:
         hook: str,
         facts: List[str],
     ) -> str:
-        """Construct a clean 50-60 word script algorithmically if LLM wanders."""
-        fact_1 = facts[0] if facts else summary
-        fact_2 = facts[1] if len(facts) > 1 else "This biological process operates completely unnoticed."
+        """Construct a clean 50-60 word script algorithmically without canned cliches."""
+        # Clean sentences from summary
+        summary_sentences = [s.strip() for s in re.split(r"[.!?]+", summary) if len(s.strip().split()) >= 4]
+        fact_sentence = summary_sentences[0] if summary_sentences else summary.strip()
+
+        # Build beat 2 from seed facts if available
+        detail_beat = ""
+        if facts and len(facts) > 0:
+            f0 = facts[0].rstrip(".")
+            if len(f0.split()) <= 12:
+                detail_beat = f"Specifically, {f0[0].lower() + f0[1:]}."
+            else:
+                detail_beat = f"{f0}."
+
+        closing_beat = "Which proves real science is often far stranger than fiction."
+        if facts and len(facts) > 1:
+            f1 = facts[1].rstrip(".")
+            if len(f1.split()) <= 12:
+                closing_beat = f"This happens because {f1[0].lower() + f1[1:]}."
 
         lines = [
-            hook.strip(),
-            f"Scientists recently confirmed that {title.lower()} is much stranger than anyone expected.",
-            f"Specifically, {fact_1.lower()}.",
-            f"{fact_2}.",
-            "It turns out nature always has one last trick up its sleeve.",
+            hook.strip().rstrip(".") + ".",
+            f"{fact_sentence.rstrip('.')}.",
         ]
+        if detail_beat:
+            lines.append(detail_beat)
+        lines.append(closing_beat)
+
         fallback = " ".join(lines)
         return fallback

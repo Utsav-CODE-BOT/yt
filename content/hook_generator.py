@@ -16,6 +16,7 @@ from content.llm_client import OllamaClient
 logger = logging.getLogger("factory.hook_generator")
 
 CLICHE_PATTERNS = [
+    r"\bdid you know\b",
     r"\bwait (until|till) the end\b",
     r"\byou won'?t believe\b",
     r"\bmind[- ]blown\b",
@@ -56,7 +57,7 @@ class HookGenerator:
             f"- Hook 3 must be a dramatic mystery statement.\n"
             f"- Hook 4 must be a visceral action or 'what happens' prompt.\n"
             f"- Hook 5 must be a bold, counter-intuitive fact.\n"
-            f"- NO clichés like 'Wait till the end', 'You won't believe', 'Hey guys'.\n"
+            f"- NO 'Did you know' openers, NO filler, NO clichés like 'Wait till the end', 'You won't believe'.\n"
             f"Format your response as 5 numbered lines only:"
         )
 
@@ -120,15 +121,16 @@ class HookGenerator:
         )
 
     def _generate_fallback_hooks(self, title: str, summary: str, needed: int) -> List[HookCandidate]:
-        """Deterministic algorithmic hooks for offline/fallback operation."""
+        """Deterministic algorithmic hooks for offline/fallback operation without cliches."""
+        clean_title = re.sub(r"^(The|Why|How)\s+", "", title, flags=re.I).strip()
         fallbacks = [
-            f"Did you know {title.lower()}?",
-            f"Here is why {title.lower()} changes everything.",
-            f"What actually happens during {title.lower()}?",
-            f"The hidden truth behind {title.lower()}.",
-            f"This one secret about {title.lower()} will surprise you.",
+            (f"{title} is completely misunderstood.", "counter_intuitive"),
+            (f"The real science behind {clean_title.lower()} changes everything.", "drama"),
+            (f"Almost everyone gets {clean_title.lower()} wrong.", "contrast"),
+            (f"What actually happens inside {clean_title.lower()}?", "action"),
+            (f"Here is the counter-intuitive truth about {clean_title.lower()}.", "counter_intuitive"),
         ]
         results = []
-        for fb in fallbacks[:needed]:
-            results.append(self._evaluate_hook(fb, "fallback"))
+        for fb_text, fb_type in fallbacks[:needed]:
+            results.append(self._evaluate_hook(fb_text, fb_type))
         return results
