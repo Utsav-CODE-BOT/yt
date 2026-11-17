@@ -232,6 +232,21 @@ class PipelineCoordinator:
                 self.db.update_job_status(job_id, PipelineState.SCRIPT_VALIDATION.value)
 
                 val_res = self.script_validator.validate(script_obj.full_script)
+                if not val_res.passed and any("short" in i or "long" in i for i in val_res.issues):
+                    logger.warning("[%s] Script duration/length issues: %s. Re-adjusting to safe 50-60 word script.", job_id, val_res.issues)
+                    corrected_text = self.scriptwriter._adjust_or_fallback(
+                        active_topic["title"],
+                        active_topic["hook_summary"],
+                        best_hook,
+                        [active_topic["hook_summary"]],
+                    )
+                    words = corrected_text.split()
+                    script_obj.full_script = corrected_text
+                    script_obj.body_text = corrected_text
+                    script_obj.word_count = len(words)
+                    script_obj.estimated_duration_seconds = self.scriptwriter.estimate_duration(len(words))
+                    val_res = self.script_validator.validate(script_obj.full_script)
+
                 ret_rep = self.retention_analyzer.analyze(script_obj.full_script)
 
                 self.db.save_script(

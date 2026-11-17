@@ -167,6 +167,6 @@ for c in cj['cues']:
     if n > 0 and i >= 0: pan = c.get('pan', 0.0); mix[i:i + n, 0] += x[:n] * (1 - max(0, pan)); mix[i:i + n, 1] += x[:n] * (1 + min(0, pan))
 # master: gentle soft-clip, peak -1 dBFS
 mix = np.tanh(mix * 1.2) / 1.2
-mix *= db(-1) / (np.abs(mix).max() + 1e-9)
+mix *= db(-1.5) / (np.abs(mix).max() + 1e-9)
 wavfile.write(P / 'data/mix.wav', SR, (mix * 32767).astype(np.int16))
 print(f"data/mix.wav: {DUR:.2f} s · voice: {'yes' if voice is not None else 'NO (captions-only)'} · music: {mus} · {len(cj['cues'])} cues")

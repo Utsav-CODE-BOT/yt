@@ -124,11 +124,11 @@ class HookGenerator:
         """Deterministic algorithmic hooks for offline/fallback operation without cliches."""
         clean_title = re.sub(r"^(The|Why|How)\s+", "", title, flags=re.I).strip()
         fallbacks = [
-            (f"{title} is completely misunderstood.", "counter_intuitive"),
-            (f"The real science behind {clean_title.lower()} changes everything.", "drama"),
-            (f"Almost everyone gets {clean_title.lower()} wrong.", "contrast"),
-            (f"What actually happens inside {clean_title.lower()}?", "action"),
-            (f"Here is the counter-intuitive truth about {clean_title.lower()}.", "counter_intuitive"),
+            (f"History tells a very different story about {clean_title}.", "contrast"),
+            (f"Almost everything you know about {clean_title} is wrong.", "counter_intuitive"),
+            (f"The untold truth behind {clean_title} changes everything.", "drama"),
+            (f"What really happened during {clean_title} was covered up.", "action"),
+            (f"Here is the astonishing truth about {clean_title}.", "counter_intuitive"),
         ]
         results = []
         for fb_text, fb_type in fallbacks[:needed]:

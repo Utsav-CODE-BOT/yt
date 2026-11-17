@@ -66,6 +66,11 @@ class YouTubeUploader:
         # Determine real vs sandbox execution
         if access_token and not access_token.startswith("mock_"):
             video_id, watch_url = self._execute_real_upload(mp4_path, metadata, privacy_status, access_token)
+        elif self.auth.token_path.exists():
+            logger.error("[%s] YouTube OAuth token exists but is expired or revoked! Cannot upload to YouTube.", job_id)
+            raise RuntimeError(
+                f"[{job_id}] YouTube OAuth token is expired or revoked. Re-authorization required."
+            )
         else:
             logger.info("[%s] Live YouTube OAuth credentials not configured. Executing verified staging upload.", job_id)
             video_id = f"yt_sim_{job_id}_{int(time.time())}"

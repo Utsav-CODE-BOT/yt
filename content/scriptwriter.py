@@ -118,32 +118,42 @@ class Scriptwriter:
         hook: str,
         facts: List[str],
     ) -> str:
-        """Construct a clean 50-60 word script algorithmically without canned cliches."""
+        """Construct a clean 50-60 word script algorithmically without canned cliches or repetition."""
         # Clean sentences from summary
         summary_sentences = [s.strip() for s in re.split(r"[.!?]+", summary) if len(s.strip().split()) >= 4]
         fact_sentence = summary_sentences[0] if summary_sentences else summary.strip()
 
-        # Build beat 2 from seed facts if available
+        # Build detail beat only from a fact that is NOT identical to the fact sentence
         detail_beat = ""
-        if facts and len(facts) > 0:
-            f0 = facts[0].rstrip(".")
-            if len(f0.split()) <= 12:
-                detail_beat = f"Specifically, {f0[0].lower() + f0[1:]}."
-            else:
-                detail_beat = f"{f0}."
+        candidate_facts = [f.strip().rstrip(".") for f in facts if f.strip()]
+        for f in candidate_facts:
+            # Check for significant overlap with fact_sentence
+            f_words = set(f.lower().split())
+            s_words = set(fact_sentence.lower().split())
+            overlap = len(f_words & s_words) / max(1, min(len(f_words), len(s_words)))
+            if overlap < 0.65 and len(f.split()) >= 4:
+                if len(f.split()) <= 14:
+                    detail_beat = f"Specifically, {f[0].lower() + f[1:]}."
+                else:
+                    detail_beat = f"{f}."
+                break
 
-        closing_beat = "Which proves real science is often far stranger than fiction."
-        if facts and len(facts) > 1:
-            f1 = facts[1].rstrip(".")
-            if len(f1.split()) <= 12:
-                closing_beat = f"This happens because {f1[0].lower() + f1[1:]}."
+        # Historical / versatile closing beat
+        clean_title = re.sub(r"^(The|Why|How)\s+", "", title, flags=re.I).strip()
+        closing_beat = "It remains one of the most astonishing turning points in history."
 
         lines = [
-            hook.strip().rstrip(".") + ".",
-            f"{fact_sentence.rstrip('.')}.",
+            hook.strip().rstrip("!?.") + ".",
+            f"{fact_sentence.rstrip('!?.')}.",
         ]
         if detail_beat:
             lines.append(detail_beat)
+
+        # Ensure script is always at least 48 words for a guaranteed 20-30s Short
+        current_words = len(" ".join(lines).split())
+        if current_words < 42:
+            lines.append("To this day, historians and researchers continue to search for the truth.")
+
         lines.append(closing_beat)
 
         fallback = " ".join(lines)
